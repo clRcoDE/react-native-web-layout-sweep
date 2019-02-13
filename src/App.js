@@ -1,28 +1,34 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
-
+import React, { Component } from "react";
+import { Button, Image, StyleSheet, Text, View ,Dimensions} from "react-native";
+import Body  from './Components/Containers/Body'
+import Nav from './Components/Containers/Nav'
+// const deviceWidth = Dimensions.get('window').width
+// const deviceHeight = Dimensions.get('window').height
 class App extends Component {
   render() {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+      <View style={styles.container}>
+       <View style={styles.navWrapper}><Nav/></View>
+       <View style={styles.bodyWrapper}><Body/></View>
+      </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container:{
+    flex:1,
+    // justifyContent: 'center',
+    // alignItems: 'center',
+    backgroundColor:'lightblue',
+    flexDirection: 'row',
+  },
+  navWrapper:{
+    flex:2
+  },
+  bodyWrapper:{
+    flex:7
+  }
+});
 
 export default App;
