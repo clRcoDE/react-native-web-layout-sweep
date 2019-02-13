@@ -1,18 +1,18 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import Fontier from '../Fontier'
-import NavHeader from '../NavHeader'
-import NavElements from '../NavElements'
-import NavProfile from '../NavProfile';
+
+import BodyHeader from './BodyHeader'
+import List from './List'
+
 // create a component
-class Nav extends Component {
+class Body extends Component {
     render() {
         return (
             <View style={styles.container}>
-                <NavHeader />
-                <NavElements />
-                <NavProfile />
+                <BodyHeader/>
+               
+                <List/>
             </View>
         );
     }
@@ -21,10 +21,11 @@ class Nav extends Component {
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: 'lightgreen'
+        flex:1,
+        backgroundColor:'white',
+        paddingHorizontal: 60,
     },
 });
 
 //make this component available to the app
-export default Nav;
+export default Body;

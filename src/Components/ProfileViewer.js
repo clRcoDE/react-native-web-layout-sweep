@@ -1,10 +1,10 @@
 //import liraries
 import React, { Component } from 'react';
 import { View, Text, StyleSheet , TouchableHighlight} from 'react-native';
-import Fontier from './Fontier'
+
 
 // create a component
-class NavProfile extends Component {
+class ProfileViewer extends Component {
     render() {
         return (
             <View style={styles.container}>
@@ -30,4 +30,4 @@ const styles = StyleSheet.create({
 });
 
 //make this component available to the app
-export default NavProfile;
+export default ProfileViewer;

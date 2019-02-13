@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Button, Image, StyleSheet, Text, View ,Dimensions} from "react-native";
-import Body  from './Components/Containers/Body'
-import Nav from './Components/Containers/Nav'
+import Body  from './Components/Body'
+import Nav from './Components/Nav'
 // const deviceWidth = Dimensions.get('window').width
 // const deviceHeight = Dimensions.get('window').height
 class App extends Component {
