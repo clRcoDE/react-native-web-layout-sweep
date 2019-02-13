@@ -6,7 +6,7 @@ import { View, Text, StyleSheet } from 'react-native';
 class ListItem extends Component {
     render() {
         return (
-            <View style={styles.container}>
+            <View style={styles.ListItemContainer}>
                 <Text>ListItem</Text>
             </View>
         );
@@ -15,11 +15,15 @@ class ListItem extends Component {
 
 // define your styles
 const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        justifyContent: 'center',
+    ListItemContainer: {
+        // flex: 1,
+        flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#2c3e50',
+        backgroundColor: '#ccc',
+        height:150,
+        elevation:5,
+        margin:10,
+        borderRadius:15
     },
 });
 

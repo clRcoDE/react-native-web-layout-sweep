@@ -43,7 +43,14 @@ const styles = StyleSheet.create({
         backgroundColor:'red'
     },
     listHeader:{
+        // flex: 1,
         flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#ccc',
+        height:150,
+        elevation:5,
+        margin:10,
+        borderRadius:15
     },
     recommendPanel:{
         flex:2

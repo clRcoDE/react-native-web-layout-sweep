@@ -11,7 +11,7 @@ class Nav extends Component {
             <View style={styles.container}>
                 <View style={styles.logoContainer}>
                 
-                
+                <Text style={styles.logoText}>Sweep</Text>
                 </View>
                 <NavMenu />
                 <ProfileViewer />
@@ -27,7 +27,14 @@ const styles = StyleSheet.create({
         backgroundColor: 'lightgreen'
     },
     logoContainer:{
-        flex:2
+        flex:2,
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    logoText:{
+        fontSize:30,
+        fontWeight: '600',
+        color:'rgba(255,255,255,0.9)'
     }
 });
 
