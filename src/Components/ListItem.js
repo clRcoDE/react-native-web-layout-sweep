@@ -1,14 +1,14 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet ,TouchableHighlight} from 'react-native';
 
 // create a component
 class ListItem extends Component {
     render() {
         return (
-            <View style={styles.ListItemContainer}>
+            <TouchableHighlight onPress={()=>{}} style={styles.ListItemContainer}>
                 <Text>ListItem</Text>
-            </View>
+            </TouchableHighlight>
         );
     }
 }

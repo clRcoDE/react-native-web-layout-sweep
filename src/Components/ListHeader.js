@@ -12,22 +12,23 @@ export default class ListHeader extends Component {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.filterBoxContainer}>
         <View style={styles.filterCheckBoxesWrapper}>
           <Text style={styles.showableText}>Show :</Text>
 
 
           <TouchableHighlight onPress={() => { }} style={styles.checkBox}>
             <View style={styles.checkBoxWrapper}>
-              {this.state.isSelected[0] ? <Image /> : <Image />}
+              {this.state.isSelected[0] ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage}/> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage}/>}
               <Text style={styles.checkBoxText}>Flights</Text>
             </View>
 
           </TouchableHighlight>
 
+
           <TouchableHighlight onPress={() => { }} style={styles.checkBox}>
             <View style={styles.checkBoxWrapper}>
-              {this.state.isSelected[0] ? <Image /> : <Image />}
+              {this.state.isSelected[1] ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage}/> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage}/>}
               <Text style={styles.checkBoxText}>Hotels</Text>
             </View>
 
@@ -35,7 +36,7 @@ export default class ListHeader extends Component {
 
           <TouchableHighlight onPress={() => { }} style={styles.checkBox}>
             <View style={styles.checkBoxWrapper}>
-              {this.state.isSelected[0] ? <Image /> : <Image />}
+              {this.state.isSelected[2] ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage}/> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage}/>}
               <Text style={styles.checkBoxText}>Rails</Text>
             </View>
 
@@ -50,15 +51,25 @@ export default class ListHeader extends Component {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  filterBoxContainer: {
     flex: 1,
-    backgroundColor: 'lime'
+    backgroundColor: 'lime',
+    justifyContent: 'center',
   },
   checkBox: {
     flexDirection: 'row',
   },
   filterCheckBoxesWrapper: {
     flexDirection: 'row',
+  },
+  checkBoxWrapper:{
+flexDirection: 'row',
+
+  },
+  selectableFilterImage:{
+    width:20,
+    hieght:20,
+    borderRadius:3
   }
 });
 

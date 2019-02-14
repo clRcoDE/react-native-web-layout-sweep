@@ -14,7 +14,7 @@ class Nav extends Component {
                 <Text style={styles.logoText}>Sweep</Text>
                 </View>
                 <NavMenu />
-                <ProfileViewer />
+                <ProfileViewer user={{image:require('../Assets/Images/profile.png'),username:'Adam'}} />
             </View>
         );
     }
@@ -24,7 +24,7 @@ class Nav extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: 'lightgreen'
+        backgroundColor: '#0082FF'
     },
     logoContainer:{
         flex:2,
