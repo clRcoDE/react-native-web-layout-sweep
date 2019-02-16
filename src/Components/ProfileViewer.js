@@ -12,13 +12,18 @@ class ProfileViewer extends Component {
                     onPress={() => { }}
                     style={styles.profileTouchableWrapper} >
                     <View style={styles.profileWrapper} >
-                    
-                        <Image
-                            source={this.props.user.image}
-                            style={styles.profilePhoto} />
-
+                    <View style={styles.profileImageNameWrapper}>
+                        <View style={styles.profileImage}>
+                            <Image
+                                source={this.props.user.image}
+                                style={styles.profilePhoto} />
+                        </View>
                         <View style={styles.profileName}>
-                            <Text>{this.props.user.username}</Text>
+                            <Text style={styles.profileNameText} >{this.props.user.username}</Text>
+                        </View>
+                        </View>
+                        <View style={styles.profileDropDown} >
+                            <Image source={require('../Assets/Images/uparrow.png')} style={{ width: 12, height: 12 }} />
                         </View>
                     </View>
                 </TouchableHighlight>
@@ -30,22 +35,29 @@ class ProfileViewer extends Component {
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        flex: 1,
-        backgroundColor: 'brown',
+        flex: 2,
+        backgroundColor: 'transparent',
     },
     profileTouchableWrapper: {
         flex: 1,
         flexDirection: 'row',
-        backgroundColor: 'blue',
+        backgroundColor: 'rgba(255,255,255,0.25)',
         // justifyContent: 'center',
         alignItems: 'center',
-        margin: 5,
+        margin: 25,
         padding: 12,
-        borderRadius: 10
+        borderRadius: 15,
+        // borderWidth: 2,
 
     },
     profileWrapper: {
+        flex: 1,
         flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        // borderWidth: 2,
+        // borderColor: 'blue',
+        padding:10
     },
     profilePhoto: {
         width: 40,
@@ -55,7 +67,26 @@ const styles = StyleSheet.create({
     profileName: {
         justifyContent: 'center',
         alignItems: 'center',
-        marginLeft: 15
+        marginLeft: 10,
+        // backgroundColor:'yellow'
+    },
+    profileImage:{
+        // backgroundColor:'red'
+    },
+    profileImageNameWrapper:{
+        // backgroundColor:'green',
+        flexDirection: 'row',
+    },
+    profileDropDown:{
+        // flex:1,
+        // flexDirection: 'row',
+        // backgroundColor:'purple',
+        // alignSelf:'flex-start'
+        alignItems: 'center',
+    },
+    profileNameText:{
+        fontWeight:'400',
+        color:'#fff'
     }
 
 });

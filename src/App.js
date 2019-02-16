@@ -24,10 +24,10 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   navWrapper:{
-    flex:2
+    flex:4
   },
   bodyWrapper:{
-    flex:7
+    flex:20
   }
 });
 

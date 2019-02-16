@@ -1,42 +1,183 @@
-//import liraries
-import React, { Component } from 'react';
-import { View, Text, StyleSheet , TouchableHighlight ,Image,FlatList} from 'react-native';
-import ExpandableElement from  './ExpandableElement'
-import {ListData} from './listdata'
-// create a component
-class NavElements extends Component {
-    constructor(props){
+import React, { Component } from 'react'
+import { Text, StyleSheet, View, FlatList, TouchableHighlight, Image, LayoutAnimation, UIManager, Animated } from 'react-native'
+import { ListData } from './listdata'
+export default class NavMenu extends Component {
+    constructor(props) {
         super(props);
+        this.state = {
+            selectedId: null,
+            selectedHeight: new Animated.Value(50),
+            normalHight: new Animated.Value(50),
+
+        }
+
+
     }
+
+
+    collapseItem = index => {
+        if (this.state.selectedId === index) {
+
+            if (this.state.selectedHeight._value === 50) {
+
+                Animated.timing(this.state.selectedHeight, { toValue: 200, duration: 100 }).start()
+                this.setState({ selectedId: index, })
+
+            } else if (this.state.selectedHeight._value === 200) {
+
+                Animated.timing(this.state.selectedHeight, { toValue: 50, duration: 100 }).start(() => {
+                    this.setState({ selectedId: -1, })
+                })
+
+
+            }
+        } else if (this.state.selectedId !== index) {
+
+
+            Animated.timing(this.state.selectedHeight, { toValue: 50, duration: 100 }).start(() => { this.setState({ selectedId: index }, () => Animated.timing(this.state.selectedHeight, { toValue: 200, duration: 100 }).start()); })
+
+
+
+        }
+    }
+
+
+
+
     render() {
         return (
             <View style={styles.container}>
+                <FlatList
+                    data={ListData}
+                    extraData={this.state.selectedId}
+                    renderItem={({ item, index }) => {
+                        return (
+                            // <View style={>
+                            <Animated.View
+                                style={this.state.selectedId === index ? [styles.expandedStyle, { height: this.state.selectedHeight }] : [styles.collapsedStyle, { height: 50 }]}
+                            >
+                                <TouchableHighlight
+                                    underlayColor='transparent'
+                                    onPress={this.collapseItem.bind(this, index)}
+                                    style={[styles.touchableStyles,]}
+                                >
 
-<FlatList 
-data={ListData}
-renderItem={({item,index})=><ExpandableElement selector={index} title={item.title}  Image={item.image} child={item.childs} />}
-/>
+                                    <View style={styles.elementParent}>
+                                        <View style={styles.elementHeaderWrapper}>
+                                            <Image source={item.image} style={{ height: 12, width: 12 }} />
+                                            <Text style={styles.elementsTitleText}>{item.title}</Text>
+                                        </View>
+                                        {this.state.selectedId === index && <View style={styles.elementChildsWrapper}>
+                                            {item.childs.map((item, indx) =>
+                                                <TouchableHighlight onPress={() => { }} style={styles.childElement}>
+                                                    <View style={styles.childElementWrapper} >
+                                                        <Image source={item.icon} style={styles.iconStyles} />
+                                                        <Text style={styles.childElementText}>{item.text}</Text>
+                                                    </View>
+                                                </TouchableHighlight>
+                                            )}
+                                        </View>}
+                                    </View>
+                                </TouchableHighlight>
+                            </Animated.View>
 
-{/* <ExpandableElement selector={0} title={'Expanses'} ImageSrc={} childImages={[require('../Assets/Images/foreward.png'),require('../Assets/Images/backward.png'),require('../Assets/Images/search.png')]} childTexts={['Upcomming Trips','Past Trips','Recent Searches']} />
-<ExpandableElement selector={1} title={'Reports'} ImageSrc={require('../Assets/Images/reports.png')} childImages={[require('../Assets/Images/foreward.png'),require('../Assets/Images/backward.png'),require('../Assets/Images/search.png')]} childTexts={['Upcomming Trips','Past Trips','Recent Searches']} />
-<ExpandableElement selector={2} title={'Bookings'} ImageSrc={require('../Assets/Images/bookings.png')} childImages={[require('../Assets/Images/foreward.png'),require('../Assets/Images/backward.png'),require('../Assets/Images/search.png')]} childTexts={['Upcomming Trips','Past Trips','Recent Searches']} />
-<ExpandableElement selector={3} title={'Administration'} ImageSrc={require('../Assets/Images/settings.png')} childImages={[require('../Assets/Images/foreward.png'),require('../Assets/Images/backward.png'),require('../Assets/Images/search.png')]} childTexts={['Upcomming Trips','Past Trips','Recent Searches']} /> */}
-              
-            
-            
+                            // </View>
+
+                        )
+                    }
+                    }
+                />
             </View>
-        );
+        )
     }
 }
 
-// define your styles
 const styles = StyleSheet.create({
-    container: {
-        flex:8,
-        backgroundColor:'transparent',
-        marginLeft:25
-    },
-});
 
-//make this component available to the app
-export default NavElements;
+    container: {
+        flex: 9,
+        backgroundColor: 'transparent',
+        marginLeft: 35,
+    },
+    expandedStyle: {
+        flex: 1,
+        backgroundColor: 'rgba(100,100,100,0.25)',
+        borderTopLeftRadius: 30,
+        borderBottomLeftRadius: 30,
+        marginVertical: 10,
+    },
+    collapsedStyle: {
+        // backgroundColor: 'rgba(200,200,200,0.05)',
+
+        flex: 1,
+        borderTopLeftRadius: 30,
+        borderBottomLeftRadius: 30,
+        marginVertical: 10,
+
+    },
+    elementHeaderWrapper: {
+        // borderWidth:3,
+        // justifyContent: 'center',
+        // backgroundColor:'red',
+        alignItems: 'center',
+        flexDirection: 'row',
+        // marginLeft:2
+    },
+
+    touchableStyles: { flex: 1, borderTopLeftRadius: 50, borderBottomLeftRadius: 50, paddingTop: 15, paddingLeft: 20, },
+    elementParent: {
+        // flexDirection: 'row',
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        // borderWidth: 3,
+    },
+    elementsTitleText: {
+        color: 'rgba(255,255,255,0.75)',
+        fontWeight: '400',
+        marginLeft: 20,
+        fontSize: 13
+    },
+    navElement: {
+        backgroundColor: 'rgba(255,255,255,0.2)',
+        borderBottomLeftRadius: 35,
+        borderTopLeftRadius: 35,
+        marginVertical: 10,
+        // justifyContent: 'center',
+        // alignItems: 'center',
+
+    },
+    elementChildsWrapper: {
+        // backgroundColor:'yellowgreen',
+        marginVertical: 16
+    },
+    childElement: {
+        height: 40,
+        alignItems: 'center',
+        flexDirection: 'row',
+        // backgroundColor:'blue',
+        borderTopLeftRadius: 50,
+        borderBottomLeftRadius: 50
+
+    },
+    iconStyles: {
+        width: 12,
+        height: 12,
+    },
+    childElementWrapper: {
+        flexDirection: 'row',
+        // paddingLeft:15
+    },
+    childElementText: {
+        color: '#fff',
+        fontSize: 12,
+        marginLeft: 12
+    }
+    // navElement: {
+    //     flexDirection: 'row',
+    // },
+    // imageStyles: {
+    //     height: 20,
+    //     width: 20
+    // }
+
+})

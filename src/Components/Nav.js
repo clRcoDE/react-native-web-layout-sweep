@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet , Image} from 'react-native';
 
 import NavMenu from './NavMenu'
 import ProfileViewer from './ProfileViewer';
@@ -10,7 +10,7 @@ class Nav extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.logoContainer}>
-                
+                <Image source={require('../Assets/Images/logo.png')} style={styles.logoImage} />
                 <Text style={styles.logoText}>Sweep</Text>
                 </View>
                 <NavMenu />
@@ -28,13 +28,21 @@ const styles = StyleSheet.create({
     },
     logoContainer:{
         flex:2,
-        justifyContent: 'center',
+        // justifyContent: 'center',
         alignItems: 'center',
+        flexDirection: 'row',
+        // backgroundColor:'red',
+        marginLeft: 35,
     },
     logoText:{
+        fontFamily: '"Comic Sans MS", cursive, sans-serif',
         fontSize:30,
         fontWeight: '600',
         color:'rgba(255,255,255,0.9)'
+    },
+    logoImage:{
+        width:42,
+        height:42
     }
 });
 

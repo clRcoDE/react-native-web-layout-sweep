@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet,FlatList ,TouchableHighlight ,Image} from 'react-native';
 import ListItem from './ListItem'
-import ListHeader from './ListHeader';
+// import ListHeader from './ListHeader';
  
 // create a component
 class List extends Component {
@@ -25,10 +25,12 @@ class List extends Component {
             <View style={styles.container}>
              <View style={styles.filterBoxContainer}>
         <View style={styles.filterCheckBoxesWrapper}>
+
+
           <Text style={styles.showableText}>Show : </Text>
 
 
-          <TouchableHighlight onPress={() => { }} style={styles.checkBox}>
+          <TouchableHighlight onPress={() => { }} style={styles.checkBox} underlayColor={'rgba(200,200,200,0.35)'}  >
             <View style={styles.checkBoxWrapper}>
               {this.state.isSelected[0] ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage}/> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage}/>}
               <Text style={styles.checkBoxText}> Flights </Text>
@@ -37,7 +39,7 @@ class List extends Component {
           </TouchableHighlight>
 
 
-          <TouchableHighlight onPress={() => { }} style={styles.checkBox}>
+          <TouchableHighlight onPress={() => { }} style={styles.checkBox}  underlayColor={'rgba(200,200,200,0.35)'}  >
             <View style={styles.checkBoxWrapper}>
               {this.state.isSelected[1] ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage}/> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage}/>}
               <Text style={styles.checkBoxText}> Hotels </Text>
@@ -45,7 +47,7 @@ class List extends Component {
 
           </TouchableHighlight>
 
-          <TouchableHighlight onPress={() => { }} style={styles.checkBox}>
+          <TouchableHighlight onPress={() => { }} style={styles.checkBox} underlayColor={'rgba(200,200,200,0.35)'}  >
             <View style={styles.checkBoxWrapper}>
               {this.state.isSelected[2] ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage}/> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage}/>}
               <Text style={styles.checkBoxText}> Rails </Text>
@@ -77,31 +79,41 @@ const styles = StyleSheet.create({
 
     container: {
         flex:18,
-        backgroundColor:'purple'
+        backgroundColor:'transparent'
     },
     filterBoxContainer: {
         flex: 1,
-        backgroundColor: 'lime',
+        backgroundColor: 'transparent',
         justifyContent: 'center',
       },
       checkBox: {
         flexDirection: 'row',
+        // borderWidth:3,
+        marginHorizontal: 8,
       },
       filterCheckBoxesWrapper: {
         flexDirection: 'row',
+        // borderWidth: 3,
       },
       checkBoxWrapper:{
     flexDirection: 'row',
+    justifyContent: 'space-between',
+    // borderWidth:2,
+    // borderColor:'red'
     
+      },
+      checkBoxText:{
+        fontWeight:'600'
       },
       selectableFilterImage:{
         width:20,
         heigth:20,
-        borderRadius:3
+        borderRadius:3,
+        marginRight:12
       },
     ListWrapper:{
         flex:10,
-        backgroundColor:'red'
+        // backgroundColor:'red'
     },
     listHeader:{
         // flex: 1,
