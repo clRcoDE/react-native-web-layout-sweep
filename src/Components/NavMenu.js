@@ -20,10 +20,10 @@ export default class NavMenu extends Component {
 
             if (this.state.selectedHeight._value === 50) {
 
-                Animated.timing(this.state.selectedHeight, { toValue: 200, duration: 100 }).start()
+                Animated.timing(this.state.selectedHeight, { toValue: 180, duration: 100 }).start()
                 this.setState({ selectedId: index, })
 
-            } else if (this.state.selectedHeight._value === 200) {
+            } else if (this.state.selectedHeight._value === 180) {
 
                 Animated.timing(this.state.selectedHeight, { toValue: 50, duration: 100 }).start(() => {
                     this.setState({ selectedId: -1, })
@@ -34,7 +34,7 @@ export default class NavMenu extends Component {
         } else if (this.state.selectedId !== index) {
 
 
-            Animated.timing(this.state.selectedHeight, { toValue: 50, duration: 100 }).start(() => { this.setState({ selectedId: index }, () => Animated.timing(this.state.selectedHeight, { toValue: 200, duration: 100 }).start()); })
+            Animated.timing(this.state.selectedHeight, { toValue: 50, duration: 100 }).start(() => { this.setState({ selectedId: index }, () => Animated.timing(this.state.selectedHeight, { toValue: 180, duration: 100 }).start()); })
 
 
 
@@ -66,6 +66,9 @@ export default class NavMenu extends Component {
                                         <View style={styles.elementHeaderWrapper}>
                                             <Image source={item.image} style={{ height: 12, width: 12 }} />
                                             <Text style={styles.elementsTitleText}>{item.title}</Text>
+                                        </View>
+                                        <View>
+                                            
                                         </View>
                                         {this.state.selectedId === index && <View style={styles.elementChildsWrapper}>
                                             {item.childs.map((item, indx) =>
@@ -124,7 +127,7 @@ const styles = StyleSheet.create({
         // marginLeft:2
     },
 
-    touchableStyles: { flex: 1, borderTopLeftRadius: 50, borderBottomLeftRadius: 50, paddingTop: 15, paddingLeft: 20, },
+    touchableStyles: { flex: 1, borderTopLeftRadius: 50, borderBottomLeftRadius: 50, paddingTop:20, paddingLeft: 20, },
     elementParent: {
         // flexDirection: 'row',
         // justifyContent: 'center',

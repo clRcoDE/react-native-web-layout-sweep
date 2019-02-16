@@ -10,6 +10,7 @@ class ProfileViewer extends Component {
             <View style={styles.container}>
                 <TouchableHighlight
                     onPress={() => { }}
+                    underlayColor='rgba(225,225,225,0.2)'
                     style={styles.profileTouchableWrapper} >
                     <View style={styles.profileWrapper} >
                     <View style={styles.profileImageNameWrapper}>
