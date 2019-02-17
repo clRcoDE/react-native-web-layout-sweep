@@ -1,53 +1,55 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableHighlight, Image } from 'react-native';
+import { View, Text, StyleSheet, TouchableHighlight, Image , Animated} from 'react-native';
 
 // create a component
 class ListItem extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            isSelected: false
+            isSelected: false,
+            heighter:new Animated.Value(0)
         }
     }
 
     collapseItem = i => {
-        this.setState(prev => ({ isSelected: !prev.isSelected }))
+        this.setState(prev => ({ isSelected: !prev.isSelected } ))
     }
     render() {
         return (
             <View style={styles.ListItemContainer}>
                 <View style={styles.itemWrapper}>
-                    <TouchableHighlight onPress={this.collapseItem.bind(this)} underlayColor='rgba(200, 200, 200,0.5)' style={styles.itemHeader}>
+                    <TouchableHighlight onPress={this.collapseItem.bind(this)} underlayColor='rgba(225, 225, 225,0.35)' style={styles.itemHeader}>
                         <View style={styles.itemHeaderWrapper} >
 
                             <View style={styles.itemDateWrapper}>
-                                <Text>{this.props.bookingData.startTime}</Text>
-                                {this.props.bookingData.endTime  && <Text>—</Text> }
-                                <Text>{this.props.bookingData.endTime}</Text>
+                                <Text style={styles.timeSpanText} >{this.props.bookingData.startTime}</Text>
+                                {this.props.bookingData.endTime  && <Text style={styles.timeSpanText} >—</Text> }
+                                <Text style={styles.timeSpanText} >{this.props.bookingData.endTime}</Text>
                             </View>
                             <View style={styles.itemFromToWrapper}>
-                                <Text>{this.props.bookingData.fromCity},{this.props.bookingData.fromCountry}</Text>
-                                <Text>{this.props.bookingData.toCity},{this.props.bookingData.toCountry}</Text>
+                                <Text style={[styles.semiText,styles.itemFromToStyles]} >{this.props.bookingData.fromCity},{this.props.bookingData.fromCountry}</Text>
+                                <Text style={[styles.semiText,styles.itemFromToStyles]} >{this.props.bookingData.toCity},{this.props.bookingData.toCountry}</Text>
                             </View>
                             <View style={styles.itemChangeBookingStatus}>
-                                <TouchableHighlight onPress={() => { }} >
-                                    <Text>Cancel Booking</Text>
+                                <TouchableHighlight underlayColor='rgba(255, 255, 255,0.1)' onPress={() => { }} style={styles.changeStatusText} >
+                                    <Text style={[styles.lightText]} >cancel Booking</Text>
                                 </TouchableHighlight>
-                                <TouchableHighlight onPress={() => { }} >
-                                    <Text>Change</Text>
+                                <TouchableHighlight underlayColor='rgba(255, 255, 255,0.1)' onPress={() => { }} style={styles.changeStatusText} >
+                                    <Text style={[{color:'#0082FF'}]} >Change</Text>
                                 </TouchableHighlight>
                             </View>
                             <View style={styles.itemCollapsableImage}></View>
                         </View>
                     </TouchableHighlight>
-                    {  this.state.isSelected &&  <View style={styles.itemDesc}>
+                    {  this.state.isSelected &&  <View style={[styles.itemDesc]}>
                         <View style={styles.datesWrapper} >
                         <Text style={styles.lightText} >{this.props.bookingData.startTime}</Text>
                         
                         </View>
                         <View style={styles.airplaneSeparator} >
                         <Image source={require('../Assets/Images/plane.png') } style={styles.notifIcon}/>
+                        <Image source={require('../Assets/Images/dotted-line.png')} style={{height:125,width:2}}/>
                         
                         </View>
                         <View style={styles.bookingDetails} >
@@ -67,11 +69,11 @@ class ListItem extends Component {
                                     </View>
                                     <View style={styles.startEndCity} >
                                         <View style={styles.startCity}>
-                                            <View style={[styles.startCityText]}><Text style={styles.citiesText} >{this.props.bookingData.StartCityAbbreviation}</Text></View>
+                                            <View style={[styles.startCityText]}><Text style={[styles.semiText,{ textTransform: 'uppercase'}]} >{this.props.bookingData.StartCityAbbreviation}</Text></View>
                                             <View style={styles.startCountryText}><Text style={styles.lightText}>{this.props.bookingData.fromCountry}</Text></View>
                                         </View>
                                         <View style={styles.endCity}>
-                                            <View style={[styles.endCityText]}><Text style={styles.citiesText} >{this.props.bookingData.DestinationCityAbbreviation}</Text></View>
+                                            <View style={[styles.endCityText]}><Text style={[styles.semiText,{ textTransform: 'uppercase'}]} >{this.props.bookingData.DestinationCityAbbreviation}</Text></View>
                                             <View style={styles.endCountryText}><Text style={styles.lightText}>{this.props.bookingData.toCountry}</Text></View>
                                         </View>
 
@@ -85,9 +87,10 @@ class ListItem extends Component {
                             </View>
                             <View style={styles.sideDetails}>
                             <View style={styles.subDetailsIcon} ><Image source={require('../Assets/Images/notif.png')} style={styles.notifIcon} /></View>
-                            <View style={styles.subDetails} ><Text style={[styles.subDetailsText,styles.lightText]} >Seat :{this.props.bookingData.Seat}</Text></View>
+                            <View style={[styles.subDetails,{paddingLeft:10}]} ><Text style={[styles.subDetailsText,styles.lightText]} >Seat :{this.props.bookingData.Seat}</Text></View>
                             <View style={styles.subDetails} ><Text style={[styles.subDetailsText,styles.lightText]} >Class :{this.props.bookingData.class}</Text></View>
-                            <View style={styles.subDetails} ><Text style={[styles.subDetailsText,styles.lightText]} >Meal plan :{this.props.bookingData.MealPlan}</Text></View>
+                            <View style={[styles.subDetails,{flex:6}]} ><Text style={[styles.subDetailsText,styles.lightText]} >Meal plan :{this.props.bookingData.MealPlan}</Text></View>
+                            <View style={styles.subDetailsEmpty}></View>
                             
                             </View>
                         </View>
@@ -114,7 +117,8 @@ const styles = StyleSheet.create({
         // padding: 10,
         backgroundColor:'#F5F5F5',
         marginVertical:14,
-        borderRadius:15
+        borderTopLeftRadius:15,
+        borderTopRightRadius:15
     },
     itemWrapper: {
         flex: 1,
@@ -161,6 +165,10 @@ const styles = StyleSheet.create({
         paddingLeft: 12
 
     },
+    timeSpanText:{
+        fontWeight:'600',
+        marginRight:5
+    },
     itemFromToWrapper: {
         flexDirection: 'row',
         flex: 5,
@@ -176,6 +184,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'center',
         alignItems: 'center',
+
+    },
+    changeStatusText:{
+marginRight:25
 
     },
     itemCollapsableImage: {
@@ -196,8 +208,13 @@ const styles = StyleSheet.create({
         // borderWidth: 1,
         // width:15,
         flex: 3,
-        paddingTop:35
-    },
+        // paddingTop:35,
+        // borderStyle:'dashed'
+        justifyContent: 'space-evenly',
+            alignItems: 'center',
+            // backgroundColor:'#F5F5F5'
+
+},
     bookingDetails: {
         flex: 48,
         // borderWidth: 1,
@@ -254,10 +271,14 @@ const styles = StyleSheet.create({
         marginRight:75,
         marginLeft:8
     },
-    citiesText:{
+    semiText:{
         fontWeight:'600',
-         textTransform: 'uppercase'
+        //  textTransform: 'uppercase'
+        color:'rgba(0,0,0,0.75)'
     
+    },
+    itemFromToStyles:{
+        marginRight:20
     },
     startEndTimeWrapper:{
         flexDirection: 'row',
@@ -293,12 +314,16 @@ const styles = StyleSheet.create({
     subDetails:{
         flex:5,
         justifyContent: 'center',
-        paddingLeft:16,
+        // paddingLeft:8,
         // alignItems: 'center',
         // backgroundColor:'blue',
         // borderWidth:2,
 
     },
+    subDetailsEmpty:{
+        flex:4,
+        // backgroundColor:'red'
+    },    
     hoursText:{
         fontSize:18,
 

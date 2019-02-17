@@ -49,7 +49,7 @@ class List extends Component {
             <Text style={styles.getMoreOutText} >Get <b>more out</b></Text><Text style={styles.sweepText}>of Sweep</Text>
             </View>
             <View style={styles.upgradeWrapper}>
-            <TouchableHighlight onPress={()=>{}} style={styles.upgradeWrapperTouchable} >
+            <TouchableHighlight onPress={()=>{}} underlayColor='rgba(75, 85, 180,0.6)'  style={styles.upgradeWrapperTouchable} >
             <Text style={styles.upgradeText} >Upgrade</Text>
             </TouchableHighlight>
             </View>
@@ -69,7 +69,7 @@ class List extends Component {
             <Text style={styles.showableText}>Show : </Text>
 
 
-            <TouchableHighlight onPress={() => { }} style={styles.checkBox} underlayColor={'rgba(200,200,200,0.35)'}  >
+            <TouchableHighlight onPress={() => { }} style={styles.checkBox} underlayColor={'rgba(200,200,200,0.05)'}  >
               <View style={styles.checkBoxWrapper}>
                 {this.state.isSelected[0] ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage} /> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage} />}
                 <Text style={styles.checkBoxText}> Flights </Text>
@@ -78,7 +78,7 @@ class List extends Component {
             </TouchableHighlight>
 
 
-            <TouchableHighlight onPress={() => { }} style={styles.checkBox} underlayColor={'rgba(200,200,200,0.35)'}  >
+            <TouchableHighlight onPress={() => { }} style={styles.checkBox} underlayColor={'rgba(200,200,200,0.05)'}  >
               <View style={styles.checkBoxWrapper}>
                 {this.state.isSelected[1] ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage} /> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage} />}
                 <Text style={styles.checkBoxText}> Hotels </Text>
@@ -86,7 +86,7 @@ class List extends Component {
 
             </TouchableHighlight>
 
-            <TouchableHighlight onPress={() => { }} style={styles.checkBox} underlayColor={'rgba(200,200,200,0.35)'}  >
+            <TouchableHighlight onPress={() => { }} style={styles.checkBox} underlayColor={'rgba(200,200,200,0.05)'}  >
               <View style={styles.checkBoxWrapper}>
                 {this.state.isSelected[2] ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage} /> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage} />}
                 <Text style={styles.checkBoxText}> Rails </Text>

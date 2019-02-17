@@ -10,7 +10,7 @@ class Header extends Component {
             <View style={styles.container}>
                 <View style={styles.wrapper}>
                     <View style={styles.headerTextWrapper}><Text style={styles.headerText}>Upcomming Trips</Text></View>
-                    <TouchableHighlight style={styles.newTripTouchable} onPress={() => { }}>
+                    <TouchableHighlight style={styles.newTripTouchable} onPress={() => {}} underlayColor='#0099FF' >
                         <View style={styles.newTripTouchableWrapper}>
                             <Text style={styles.tapMoreText} >Book New Trips</Text>
                             <View style={styles.tapMoreImageWrapper}>
@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     newTripTouchable: {
         justifyContent: 'center',
         alignItems: 'center',
+        borderRadius:50
     },
     headerText: {
         fontSize: 30,

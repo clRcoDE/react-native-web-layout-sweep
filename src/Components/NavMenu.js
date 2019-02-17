@@ -72,7 +72,7 @@ export default class NavMenu extends Component {
                                         </View>
                                         {this.state.selectedId === index && <View style={styles.elementChildsWrapper}>
                                             {item.childs.map((item, indx) =>
-                                                <TouchableHighlight onPress={() => { }} style={styles.childElement}>
+                                                <TouchableHighlight onPress={() => { }} underlayColor='rgba(0, 100, 190,0.5)'  style={styles.childElement}>
                                                     <View style={styles.childElementWrapper} >
                                                         <Image source={item.icon} style={styles.iconStyles} />
                                                         <Text style={styles.childElementText}>{item.text}</Text>
