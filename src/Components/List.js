@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableHighlight, Image } from 'react-native';
 import ListItem from './ListItem'
 // import ListHeader from './ListHeader';
-
+import {ListData} from './ListData'
 // create a component
 class List extends Component {
   constructor(props) {
@@ -16,19 +16,21 @@ class List extends Component {
     return (
       <View style={styles.listHeader}>
         <TouchableHighlight
-          onPress={() => { }}
-          underlayColor={'rgba(225,225,225,0.8)'}
+          onPress={() => {}}
+          underlayColor={'rgba(225,225,225,0.4)'}
           style={styles.recommendPanel}>
           <View style={styles.recommendPanelWrapper} >
-            <Image style={{ flex: 11 }} resizeMode='center' source={require('../Assets/Images/credit-card.png')} />
-            <View style={{ flex: 20, backgroundColor: 'red' }}>
+          <View style={styles.recommendPanelCardImageWrapper}>
+            <Image style={styles.recommendPanelCardImage} resizeMode='center' source={require('../Assets/Images/credit-card.png')} />
+            </View>
+            <View style={styles.recommendPanelInfo}>
               <View style={styles.recommendHeaderView}>
-                <Text style={{ fontSize: 25 }}>Available for your</Text>
-                <Text style={{ fontSize: 25 }}>smartphone</Text>
+                <Text style={{ fontSize: 20 }}>Available for your</Text>
+                <Text style={{ fontSize: 20 }}>smartphone</Text>
               </View>
               <View style={styles.recommendDesc}>
-              <TouchableHighlight style={styles.recommendOs} onPress={()=>{}}><Text>for Iphone</Text></TouchableHighlight>
-              <TouchableHighlight style={styles.recommendOs} onPress={()=>{}}><Text>for Android</Text></TouchableHighlight>
+              <TouchableHighlight underlayColor='rgba(0,0,0,0.25)' style={styles.recommendOsTouchable} onPress={()=>{}}><View style={styles.recommendOs} ><Image source={require('../Assets/Images/apple.png')} style={styles.iconStyle} /><Text>for Iphone</Text></View></TouchableHighlight>
+              <TouchableHighlight underlayColor='rgba(0,0,0,0.25)' style={styles.recommendOsTouchable} onPress={()=>{}}><View style={styles.recommendOs} ><Image source={require('../Assets/Images/playstore.png')} style={styles.iconStyle} /><Text>for Android</Text></View></TouchableHighlight>
 
               </View>
             </View>
@@ -36,11 +38,21 @@ class List extends Component {
         </TouchableHighlight>
         <TouchableHighlight
           onPress={() => { }}
-          underlayColor={'rgba(225,225,225,0.8)'}
+          underlayColor={'rgba(225,225,225,0.4)'}
           style={styles.learnMorePanel}>
           <View style={styles.learnMorePanelWrapper}>
             <View style={styles.AbsoluteImageWrapper}>
-              <Image />
+              <Image source={require('../Assets/Images/gift.png')}  style={{flex:1}}  resizeMode='center' />
+            </View>
+            <View style={styles.learnMorePanelUpgrade}>
+            <View style={styles.getMoreOut}>
+            <Text style={styles.getMoreOutText} >Get <b>more out</b></Text><Text style={styles.sweepText}>of Sweep</Text>
+            </View>
+            <View style={styles.upgradeWrapper}>
+            <TouchableHighlight onPress={()=>{}} style={styles.upgradeWrapperTouchable} >
+            <Text style={styles.upgradeText} >Upgrade</Text>
+            </TouchableHighlight>
+            </View>
             </View>
           </View>
         </TouchableHighlight>
@@ -88,10 +100,10 @@ class List extends Component {
         </View>
         <View style={styles.ListWrapper}>
           <FlatList
-            data={[1, 2, 3, 4, 5, 6]}
+            data={ListData}
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={this.listHeaderGenerator}
-            renderItem={({ item, index }) => <ListItem timespan={item.timespan} destination={item.destination} beginning={item.beginning} />}
+            renderItem={({ item, index }) => <ListItem bookingData={item} />}
           />
         </View>
 
@@ -112,6 +124,8 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: 'transparent',
     justifyContent: 'center',
+    // borderWidth:3,
+    // borderColor:'orange'
   },
   checkBox: {
     flexDirection: 'row',
@@ -130,24 +144,40 @@ const styles = StyleSheet.create({
 
   },
   recommendHeaderView:{
-    backgroundColor:'green',
+    // backgroundColor:'green',
     flex:1,
     justifyContent: 'center',
+    marginHorizontal:25
   },
   recommendDesc:{
-    backgroundColor:'yellow',
+    // backgroundColor:'yellow',
     flex:1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'space-evenly',
+    // justifyContent: 'space-evenly',
+    marginHorizontal:25
+
+
   },
   recommendOs:{
     padding:10,
-    width:100,
+    width:140,
     borderRadius:50,
     backgroundColor:'#fff',
     justifyContent: 'center',
     alignItems: 'center',
+    flexDirection: 'row',
+    height:50,
+    // marginRight:25,
+    // backgroundColor:'purple',
+
+  },
+  recommendOsTouchable:{
+    borderRadius:50,
+    // backgroundColor:'green',
+    marginRight:25,
+
+
   },
   recommendPanelWrapper: {
     flex: 1,
@@ -167,28 +197,104 @@ const styles = StyleSheet.create({
   },
   ListWrapper: {
     flex: 10,
+    marginTop:10,
+    borderColor:'lime',
+    // borderWidth:3,
     // backgroundColor:'red'
   },
   listHeader: {
     // flex: 1,
     flexDirection: 'row',
     // alignItems: 'center',
-    backgroundColor: '#ccc',
+    // backgroundColor: '#ccc',
     height: 200,
     elevation: 5,
+    
     margin: 10,
-    borderRadius: 15
+    borderRadius: 15,
+    // borderWidth:3,
+    borderColor:'red'
   },
   recommendPanel: {
-    flex: 2,
+    flex: 10,
     backgroundColor: '#eee',
     borderRadius: 15,
     marginRight: 30
   },
   learnMorePanel: {
-    flex: 1,
+    flex: 5,
     backgroundColor: '#eee',
     borderRadius: 15
+  },
+  iconStyle:{
+    width:14,
+    height:14,
+    marginRight:10
+  },
+  recommendPanelInfo:{
+    flex:20,
+    padding:15
+  },
+  recommendPanelCardImageWrapper:{
+    flex:11,
+    // backgroundColor:'red',
+    padding:20
+  },
+  recommendPanelCardImage:{
+    flex:1,
+  },
+  AbsoluteImageWrapper:{
+    // borderWidth:3,
+    borderRadius:10,
+    flex:1,
+    position: 'absolute',
+    zIndex:-1,
+    top:0,
+    bottom:0,
+    left:0,
+    right:0,
+    backgroundColor:'#5460C3',
+    paddingLeft:125
+    
+  },
+  learnMorePanelUpgrade:{
+    flex:1,
+    backgroundColor:'transparent',
+    zIndex:1,
+    padding:15,
+    paddingLeft:30
+  },
+  getMoreOut:{
+    // borderWidth:2,
+    flex:1
+  },
+  upgradeWrapper:{
+    flex:1,
+    // borderWidth:1,
+    justifyContent: 'center',
+    // borderColor:'red',
+    alignItems: 'flex-start',
+  },
+  upgradeWrapperTouchable:{
+    borderWidth:2,
+    borderColor:'rgba(255,255,255,0.25)',
+    paddingVertical:10,
+    paddingHorizontal:18,
+    borderRadius:50
+    // alignItems:'center'
+    // alignItems:'baseline'
+  },
+  getMoreOutText:{
+    fontSize:23,
+    color:'#fff',
+    // fontFamily: 'Verdana, Geneva, sans-serif',
+  },
+  sweepText:{
+    color:'#fff',
+    fontSize:23
+  },
+  upgradeText:{
+    color:'#fff'
   }
 });
 

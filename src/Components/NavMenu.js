@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View, FlatList, TouchableHighlight, Image, LayoutAnimation, UIManager, Animated } from 'react-native'
-import { ListData } from './listdata'
+import { NavData } from './NavData'
 export default class NavMenu extends Component {
     constructor(props) {
         super(props);
@@ -34,7 +34,7 @@ export default class NavMenu extends Component {
         } else if (this.state.selectedId !== index) {
 
 
-            Animated.timing(this.state.selectedHeight, { toValue: 50, duration: 100 }).start(() => { this.setState({ selectedId: index }, () => Animated.timing(this.state.selectedHeight, { toValue: 180, duration: 100 }).start()); })
+            Animated.timing(this.state.selectedHeight, { toValue: 50, duration: 100 }).start(() => { this.setState({ selectedId: index }, () => Animated.timing(this.state.selectedHeight, { toValue: 180, duration: 150 }).start()); })
 
 
 
@@ -48,7 +48,7 @@ export default class NavMenu extends Component {
         return (
             <View style={styles.container}>
                 <FlatList
-                    data={ListData}
+                    data={NavData}
                     extraData={this.state.selectedId}
                     renderItem={({ item, index }) => {
                         return (
