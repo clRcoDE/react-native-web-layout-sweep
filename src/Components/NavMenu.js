@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 9,
         backgroundColor: 'transparent',
-        marginLeft: 35,
+        marginLeft: 25,
     },
     expandedStyle: {
         flex: 1,

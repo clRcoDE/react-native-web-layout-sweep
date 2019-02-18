@@ -32,7 +32,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         flexDirection: 'row',
         // backgroundColor:'red',
-        marginLeft: 35,
+        marginLeft: 25,
     },
     logoText:{
         fontFamily: '"Comic Sans MS", cursive, sans-serif',

@@ -3,25 +3,55 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableHighlight, Image } from 'react-native';
 import ListItem from './ListItem'
 // import ListHeader from './ListHeader';
-import {ListData} from './ListData'
+import { ListData } from './ListData'
 // create a component
 class List extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      isSelected: [true, false, false]
+
+      filter: {
+        flights: true,
+        hotels: true,
+        rails: false
+      },
+
+
+
+
+
+
     }
   }
+
+
+  changeFilter = (x) => {
+
+    // if (x === 'hotels') {
+    //   this.setState((prevState) => ({ ...prevState, filter: { ...prevState.filter, hotels: !prevState.filter.hotels } }))
+    // } else if (x === 'flights') {
+    //   this.setState((prevState) => ({ ...prevState, filter: { ...prevState.filter, flights: !prevState.filter.flights } }))
+    // }
+    // else if (x === 'rails') {
+    //   this.setState((prevState) => ({ ...prevState, filter: { ...prevState.filter, rails: !prevState.filter.rails } }))
+    // }
+
+    this.setState((prevState) => ({ ...prevState, filter: { ...prevState.filter, [x]: !prevState.filter[x] } }))
+    console.log(this.state.filter)
+
+  }
+
+
   listHeaderGenerator = () => {
     return (
       <View style={styles.listHeader}>
         <TouchableHighlight
-          onPress={() => {}}
+          onPress={() => { }}
           underlayColor={'rgba(225,225,225,0.4)'}
           style={styles.recommendPanel}>
           <View style={styles.recommendPanelWrapper} >
-          <View style={styles.recommendPanelCardImageWrapper}>
-            <Image style={styles.recommendPanelCardImage} resizeMode='center' source={require('../Assets/Images/credit-card.png')} />
+            <View style={styles.recommendPanelCardImageWrapper}>
+              <Image style={styles.recommendPanelCardImage} resizeMode='center' source={require('../Assets/Images/credit-card.png')} />
             </View>
             <View style={styles.recommendPanelInfo}>
               <View style={styles.recommendHeaderView}>
@@ -29,8 +59,18 @@ class List extends Component {
                 <Text style={{ fontSize: 20 }}>smartphone</Text>
               </View>
               <View style={styles.recommendDesc}>
-              <TouchableHighlight underlayColor='rgba(0,0,0,0.25)' style={styles.recommendOsTouchable} onPress={()=>{}}><View style={styles.recommendOs} ><Image source={require('../Assets/Images/apple.png')} style={styles.iconStyle} /><Text>for Iphone</Text></View></TouchableHighlight>
-              <TouchableHighlight underlayColor='rgba(0,0,0,0.25)' style={styles.recommendOsTouchable} onPress={()=>{}}><View style={styles.recommendOs} ><Image source={require('../Assets/Images/playstore.png')} style={styles.iconStyle} /><Text>for Android</Text></View></TouchableHighlight>
+                <TouchableHighlight underlayColor='rgba(0,0,0,0.25)' style={styles.recommendOsTouchable} onPress={() => { }}>
+                  <View style={styles.recommendOs} >
+                    <Image source={require('../Assets/Images/apple.png')} style={styles.iconStyle} />
+                    <Text>for Iphone</Text>
+                  </View>
+                </TouchableHighlight>
+                <TouchableHighlight underlayColor='rgba(0,0,0,0.25)' style={styles.recommendOsTouchable} onPress={() => { }}>
+                  <View style={styles.recommendOs} >
+                    <Image source={require('../Assets/Images/playstore.png')} style={styles.iconStyle} />
+                    <Text>for Android</Text>
+                  </View>
+                </TouchableHighlight>
 
               </View>
             </View>
@@ -42,17 +82,17 @@ class List extends Component {
           style={styles.learnMorePanel}>
           <View style={styles.learnMorePanelWrapper}>
             <View style={styles.AbsoluteImageWrapper}>
-              <Image source={require('../Assets/Images/gift.png')}  style={{flex:1}}  resizeMode='center' />
+              <Image source={require('../Assets/Images/gift.png')} style={{ flex: 1 }} resizeMode='center' />
             </View>
             <View style={styles.learnMorePanelUpgrade}>
-            <View style={styles.getMoreOut}>
-            <Text style={styles.getMoreOutText} >Get <b>more out</b></Text><Text style={styles.sweepText}>of Sweep</Text>
-            </View>
-            <View style={styles.upgradeWrapper}>
-            <TouchableHighlight onPress={()=>{}} underlayColor='rgba(75, 85, 180,0.6)'  style={styles.upgradeWrapperTouchable} >
-            <Text style={styles.upgradeText} >Upgrade</Text>
-            </TouchableHighlight>
-            </View>
+              <View style={styles.getMoreOut}>
+                <Text style={styles.getMoreOutText} >Get <b>more out</b></Text><Text style={styles.sweepText}>of Sweep</Text>
+              </View>
+              <View style={styles.upgradeWrapper}>
+                <TouchableHighlight onPress={() => { }} underlayColor='rgba(75, 85, 180,0.6)' style={styles.upgradeWrapperTouchable} >
+                  <Text style={styles.upgradeText} >Upgrade</Text>
+                </TouchableHighlight>
+              </View>
             </View>
           </View>
         </TouchableHighlight>
@@ -69,26 +109,26 @@ class List extends Component {
             <Text style={styles.showableText}>Show : </Text>
 
 
-            <TouchableHighlight onPress={() => { }} style={styles.checkBox} underlayColor={'rgba(200,200,200,0.05)'}  >
+            <TouchableHighlight onPress={this.changeFilter.bind(this, 'flights')} style={styles.checkBox} underlayColor={'rgba(200,200,200,0.05)'}  >
               <View style={styles.checkBoxWrapper}>
-                {this.state.isSelected[0] ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage} /> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage} />}
+                {this.state.filter.flights ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage} /> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage} />}
                 <Text style={styles.checkBoxText}> Flights </Text>
               </View>
 
             </TouchableHighlight>
 
 
-            <TouchableHighlight onPress={() => { }} style={styles.checkBox} underlayColor={'rgba(200,200,200,0.05)'}  >
+            <TouchableHighlight onPress={this.changeFilter.bind(this, 'hotels')} style={styles.checkBox} underlayColor={'rgba(200,200,200,0.05)'}  >
               <View style={styles.checkBoxWrapper}>
-                {this.state.isSelected[1] ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage} /> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage} />}
+                {this.state.filter.hotels ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage} /> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage} />}
                 <Text style={styles.checkBoxText}> Hotels </Text>
               </View>
 
             </TouchableHighlight>
 
-            <TouchableHighlight onPress={() => { }} style={styles.checkBox} underlayColor={'rgba(200,200,200,0.05)'}  >
+            <TouchableHighlight onPress={this.changeFilter.bind(this, 'rails')} style={styles.checkBox} underlayColor={'rgba(200,200,200,0.05)'}  >
               <View style={styles.checkBoxWrapper}>
-                {this.state.isSelected[2] ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage} /> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage} />}
+                {this.state.filter.rails ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage} /> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage} />}
                 <Text style={styles.checkBoxText}> Rails </Text>
               </View>
 
@@ -101,10 +141,12 @@ class List extends Component {
         <View style={styles.ListWrapper}>
           <FlatList
             data={ListData}
+            extraData={this.state.filter}
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={this.listHeaderGenerator}
-            renderItem={({ item, index }) => <ListItem bookingData={item} />}
-          />
+            renderItem={({ item, index }) => <View>{this.state.filter[item.tag] && <ListItem bookingData={item} selected={this.state.filter} />}</View>
+            } 
+            />
         </View>
 
 
@@ -143,48 +185,54 @@ const styles = StyleSheet.create({
     // borderColor:'red'
 
   },
-  recommendHeaderView:{
+  recommendHeaderView: {
     // backgroundColor:'green',
-    flex:1,
+    flex: 1,
     justifyContent: 'center',
-    marginHorizontal:25
+    marginHorizontal: 14
   },
-  recommendDesc:{
+  recommendDesc: {
     // backgroundColor:'yellow',
-    flex:1,
+    flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     // justifyContent: 'space-evenly',
-    marginHorizontal:25
+    marginHorizontal: 14,
+    // flexWrap:'wrap'
 
 
   },
-  recommendOs:{
-    padding:10,
-    width:140,
-    borderRadius:50,
-    backgroundColor:'#fff',
+  recommendOs: {
+    padding: 12,
+    // maxWidth: 140,
+    // minWidth: 130,
+    borderRadius: 50,
+    backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-    height:50,
+    height: 55,
+    // margin: 5,
     // marginRight:25,
     // backgroundColor:'purple',
 
   },
-  recommendOsTouchable:{
-    borderRadius:50,
+  recommendOsTouchable: {
+    borderRadius: 50,
     // backgroundColor:'green',
-    marginRight:25,
+    marginRight: 12,
+    flex: 1,
+    // backgroundColor:'red'
 
 
   },
   recommendPanelWrapper: {
-    flex: 1,
+    flex: 2,
     flexDirection: 'row',
+    // backgroundColor:'red'
   },
   learnMorePanelWrapper: {
-    flex: 1
+    flex: 2
   },
   checkBoxText: {
     fontWeight: '600'
@@ -197,8 +245,8 @@ const styles = StyleSheet.create({
   },
   ListWrapper: {
     flex: 10,
-    marginTop:10,
-    borderColor:'lime',
+    marginTop: 10,
+    borderColor: 'lime',
     // borderWidth:3,
     // backgroundColor:'red'
   },
@@ -207,13 +255,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     // alignItems: 'center',
     // backgroundColor: '#ccc',
-    height: 200,
+    minHeight: 225,
     elevation: 5,
-    
+
     margin: 10,
     borderRadius: 15,
     // borderWidth:3,
-    borderColor:'red'
+    borderColor: 'red'
   },
   recommendPanel: {
     flex: 10,
@@ -226,75 +274,75 @@ const styles = StyleSheet.create({
     backgroundColor: '#eee',
     borderRadius: 15
   },
-  iconStyle:{
-    width:14,
-    height:14,
-    marginRight:10
+  iconStyle: {
+    width: 14,
+    height: 14,
+    marginRight: 10
   },
-  recommendPanelInfo:{
-    flex:20,
-    padding:15
+  recommendPanelInfo: {
+    flex: 20,
+    padding: 15
   },
-  recommendPanelCardImageWrapper:{
-    flex:11,
+  recommendPanelCardImageWrapper: {
+    flex: 11,
     // backgroundColor:'red',
-    padding:20
+    padding: 20
   },
-  recommendPanelCardImage:{
-    flex:1,
+  recommendPanelCardImage: {
+    flex: 1,
   },
-  AbsoluteImageWrapper:{
+  AbsoluteImageWrapper: {
     // borderWidth:3,
-    borderRadius:10,
-    flex:1,
+    borderRadius: 10,
+    flex: 1,
     position: 'absolute',
-    zIndex:-1,
-    top:0,
-    bottom:0,
-    left:0,
-    right:0,
-    backgroundColor:'#5460C3',
-    paddingLeft:125
-    
+    zIndex: -1,
+    top: 0,
+    bottom: 0,
+    left: 0,
+    right: 0,
+    backgroundColor: '#5460C3',
+    paddingLeft: 125
+
   },
-  learnMorePanelUpgrade:{
-    flex:1,
-    backgroundColor:'transparent',
-    zIndex:1,
-    padding:15,
-    paddingLeft:30
+  learnMorePanelUpgrade: {
+    flex: 1,
+    backgroundColor: 'transparent',
+    zIndex: 1,
+    padding: 15,
+    paddingLeft: 30
   },
-  getMoreOut:{
+  getMoreOut: {
     // borderWidth:2,
-    flex:1
+    flex: 1
   },
-  upgradeWrapper:{
-    flex:1,
+  upgradeWrapper: {
+    flex: 1,
     // borderWidth:1,
     justifyContent: 'center',
     // borderColor:'red',
     alignItems: 'flex-start',
   },
-  upgradeWrapperTouchable:{
-    borderWidth:2,
-    borderColor:'rgba(255,255,255,0.25)',
-    paddingVertical:10,
-    paddingHorizontal:18,
-    borderRadius:50
+  upgradeWrapperTouchable: {
+    borderWidth: 2,
+    borderColor: 'rgba(255,255,255,0.25)',
+    paddingVertical: 10,
+    paddingHorizontal: 18,
+    borderRadius: 50
     // alignItems:'center'
     // alignItems:'baseline'
   },
-  getMoreOutText:{
-    fontSize:23,
-    color:'#fff',
+  getMoreOutText: {
+    fontSize: 23,
+    color: '#fff',
     // fontFamily: 'Verdana, Geneva, sans-serif',
   },
-  sweepText:{
-    color:'#fff',
-    fontSize:23
+  sweepText: {
+    color: '#fff',
+    fontSize: 23
   },
-  upgradeText:{
-    color:'#fff'
+  upgradeText: {
+    color: '#fff'
   }
 });
 

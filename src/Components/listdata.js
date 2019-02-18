@@ -13,7 +13,8 @@ export const ListData = [
         class: 'Business',
         MealPlan: 'Standard',
         Seat: 'Window',
-        Airline: { name: 'Emirates', icon: require('../Assets/Images/emirates.png') }
+        Airline: { name: 'Emirates', icon: require('../Assets/Images/emirates.png') },
+        tag:'flights'
 
 
     },
@@ -32,7 +33,8 @@ export const ListData = [
         class: 'First Class',
         MealPlan: 'Vegetables',
         Seat: 'beside',
-        Airline: { name: 'Qatar Airways', icon: require('../Assets/Images/qatarAirways.png') }
+        Airline: { name: 'Qatar Airways', icon: require('../Assets/Images/qatarAirways.png') },
+        tag:'rails'
 
 
     },
@@ -54,7 +56,8 @@ export const ListData = [
         class: 'Business',
         MealPlan: 'diet',
         Seat: 'Window',
-        Airline: { name: 'virgin atlantic', icon: require('../Assets/Images/virgin.jpg') }
+        Airline: { name: 'virgin atlantic', icon: require('../Assets/Images/virgin.jpg') },
+        tag:'hotels'
 
 
     },
@@ -73,7 +76,8 @@ export const ListData = [
         class: 'Business',
         MealPlan: 'Standard',
         Seat: 'Window',
-        Airline: { name: 'Emirates', icon: require('../Assets/Images/emirates.png') }
+        Airline: { name: 'Emirates', icon: require('../Assets/Images/emirates.png') },
+        tag:'rails'
 
 
     },
@@ -94,7 +98,8 @@ export const ListData = [
         class: 'Business',
         MealPlan: 'Standard',
         Seat: 'Window',
-        Airline: { name: 'Qatar Airways', icon: require('../Assets/Images/qatarAirways.png') }
+        Airline: { name: 'Qatar Airways', icon: require('../Assets/Images/qatarAirways.png') },
+        tag:'flights'
 
 
     },

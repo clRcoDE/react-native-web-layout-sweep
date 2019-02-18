@@ -8,18 +8,29 @@ class ListItem extends Component {
         super(props)
         this.state = {
             isSelected: false,
-            heighter:new Animated.Value(0)
+            heighter:new Animated.Value(0),
+            tag:this.props.bookingData.tag
         }
     }
 
     collapseItem = i => {
         this.setState(prev => ({ isSelected: !prev.isSelected } ))
     }
+
+componentDidUpdate(){
+    // console.log(this.props.selected[this.props.bookingData.tag])
+
+}
+
     render() {
+        
+        // console.log(this.props.selected[this.props.bookingData.tag])
         return (
+
+        
             <View style={styles.ListItemContainer}>
-                <View style={styles.itemWrapper}>
-                    <TouchableHighlight onPress={this.collapseItem.bind(this)} underlayColor='rgba(225, 225, 225,0.35)' style={styles.itemHeader}>
+                 <View style={styles.itemWrapper}>
+                  <TouchableHighlight onPress={this.collapseItem.bind(this)} underlayColor='rgba(225, 225, 225,0.35)' style={styles.itemHeader}>
                         <View style={styles.itemHeaderWrapper} >
 
                             <View style={styles.itemDateWrapper}>
