@@ -4,13 +4,22 @@ import Body  from './Components/Body'
 import Nav from './Components/Nav'
 // const deviceWidth = Dimensions.get('window').width
 // const deviceHeight = Dimensions.get('window').height
+import {rootReducer} from '../src/Services/Reducers/rootReducer'
+import {createStore} from 'redux'
+import {Provider} from 'react-redux'
+
+
+export const store = createStore(rootReducer)
+
 class App extends Component {
   render() {
     return (
-      <View style={styles.container}>
+      <Provider  store={store} >
+      <View style={styles.container} >
        <View style={styles.navWrapper}><Nav/></View>
        <View style={styles.bodyWrapper}><Body/></View>
-      </View>
+       </View>
+      </Provider>
     );
   }
 }
@@ -20,14 +29,15 @@ const styles = StyleSheet.create({
     flex:1,
     // justifyContent: 'center',
     // alignItems: 'center',
-    backgroundColor:'lightblue',
+    // backgroundColor:'lightblue',
     flexDirection: 'row',
+    // borderWidth: 10,
   },
   navWrapper:{
-    flex:4
+    flex:8
   },
   bodyWrapper:{
-    flex:20
+    flex:40
   }
 });
 

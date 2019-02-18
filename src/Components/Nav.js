@@ -24,15 +24,17 @@ class Nav extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#0082FF'
+        backgroundColor: '#0082FF',
+        borderWidth:1,
+        // justifyContent: 'center',
     },
     logoContainer:{
         flex:2,
-        // justifyContent: 'center',
+        justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
         // backgroundColor:'red',
-        marginLeft: 25,
+        // marginLeft: 25,
     },
     logoText:{
         fontFamily: '"Comic Sans MS", cursive, sans-serif',

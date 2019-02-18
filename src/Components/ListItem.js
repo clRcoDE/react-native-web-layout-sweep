@@ -8,27 +8,44 @@ class ListItem extends Component {
         super(props)
         this.state = {
             isSelected: false,
-            heighter:new Animated.Value(0),
-            tag:this.props.bookingData.tag
+            fader:new Animated.Value(0),
+            tag:this.props.bookingData.tag,
+            transformer:new Animated.Value(-50)
         }
     }
 
     collapseItem = i => {
         this.setState(prev => ({ isSelected: !prev.isSelected } ))
     }
+    componentDidMount(){
+        console.log(this.props.indexer)
+        Animated.parallel([
+            Animated.timing((this.state.fader),{toValue:1,duration:600,delay:(this.props.indexer+1)*500}),
+            Animated.timing((this.state.transformer),{toValue:25,duration:600,delay:(this.props.indexer+1)*500})
+        ]).start()
+        
+    }
+    componentDidUpdate(){
+        console.log(this.props.indexer)
+        Animated.parallel([
+            Animated.timing((this.state.fader),{toValue:1,duration:600,delay:(this.props.indexer+1)*500}),
+            Animated.timing((this.state.transformer),{toValue:25,duration:600,delay:(this.props.indexer+1)*500}),
+          
+        ]).start()
+       
 
-componentDidUpdate(){
-    // console.log(this.props.selected[this.props.bookingData.tag])
+    }
 
-}
+
 
     render() {
         
+
+    
         // console.log(this.props.selected[this.props.bookingData.tag])
         return (
 
-        
-            <View style={styles.ListItemContainer}>
+            <Animated.View style={[styles.ListItemContainer,{opacity:this.state.fader,transform:([{translateX:this.state.transformer}])}]}>
                  <View style={styles.itemWrapper}>
                   <TouchableHighlight onPress={this.collapseItem.bind(this)} underlayColor='rgba(225, 225, 225,0.35)' style={styles.itemHeader}>
                         <View style={styles.itemHeaderWrapper} >
@@ -108,7 +125,7 @@ componentDidUpdate(){
 
                     </View>}
                 </View>
-            </View>
+            </Animated.View>
         );
     }
 }
@@ -119,6 +136,8 @@ const styles = StyleSheet.create({
         // flex: 1,
         flexDirection: 'row',
         alignItems: 'center',
+        // borderWidth:1,
+
         // backgroundColor: 'yellow',
         // height: 50,
         // elevation: 5,

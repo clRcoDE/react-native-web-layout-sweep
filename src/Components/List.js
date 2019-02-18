@@ -1,20 +1,28 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableHighlight, Image } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableHighlight, Image , Animated} from 'react-native';
 import ListItem from './ListItem'
 // import ListHeader from './ListHeader';
 import { ListData } from './ListData'
 // create a component
+import {filterCreator} from '../Services/Actions/action'
+import {connect} from 'react-redux'
 class List extends Component {
   constructor(props) {
     super(props)
     this.state = {
 
-      filter: {
-        flights: true,
-        hotels: true,
-        rails: false
-      },
+
+      //********************************* changing state of filters before Redux  **************************************** */
+      // filter: {
+      //   flights: true,
+      //   hotels: true,
+      //   rails: false
+
+      // },
+
+
+    // fader:new  Animated.Value(0)
 
 
 
@@ -25,8 +33,10 @@ class List extends Component {
   }
 
 
-  changeFilter = (x) => {
+  changeFilter = (inputer) => {
 
+
+    //*********************** change filter from state - apporoche 1 : without destructuring  - no redux  ************************* */
     // if (x === 'hotels') {
     //   this.setState((prevState) => ({ ...prevState, filter: { ...prevState.filter, hotels: !prevState.filter.hotels } }))
     // } else if (x === 'flights') {
@@ -36,10 +46,30 @@ class List extends Component {
     //   this.setState((prevState) => ({ ...prevState, filter: { ...prevState.filter, rails: !prevState.filter.rails } }))
     // }
 
-    this.setState((prevState) => ({ ...prevState, filter: { ...prevState.filter, [x]: !prevState.filter[x] } }))
-    console.log(this.state.filter)
+     //*********************** change filter from state - apporoche 2 :  destructuring  mode - no redux **************************** */
+
+    // this.setState((prevState) => ({ ...prevState, filter: { ...prevState.filter, [x]: !prevState.filter[x] } }))
+    // console.log(this.state.filter)
+
+
+    //**************************************  change filter with dispatching action - REDUX -  **************************************** */
+    this.props.filterCreator(inputer)
+
+
+
 
   }
+
+  componentDidUpdate(){
+    
+  }
+
+
+
+  
+  // fadeIn=(index)=>{
+  //   Animated.timing(this.state.fader,{toValue:1,duration:500,delay:index*500}).start()
+  // }
 
 
   listHeaderGenerator = () => {
@@ -111,7 +141,7 @@ class List extends Component {
 
             <TouchableHighlight onPress={this.changeFilter.bind(this, 'flights')} style={styles.checkBox} underlayColor={'rgba(200,200,200,0.05)'}  >
               <View style={styles.checkBoxWrapper}>
-                {this.state.filter.flights ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage} /> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage} />}
+                {this.props.filter.flights ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage} /> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage} />}
                 <Text style={styles.checkBoxText}> Flights </Text>
               </View>
 
@@ -120,7 +150,7 @@ class List extends Component {
 
             <TouchableHighlight onPress={this.changeFilter.bind(this, 'hotels')} style={styles.checkBox} underlayColor={'rgba(200,200,200,0.05)'}  >
               <View style={styles.checkBoxWrapper}>
-                {this.state.filter.hotels ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage} /> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage} />}
+                {this.props.filter.hotels ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage} /> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage} />}
                 <Text style={styles.checkBoxText}> Hotels </Text>
               </View>
 
@@ -128,7 +158,7 @@ class List extends Component {
 
             <TouchableHighlight onPress={this.changeFilter.bind(this, 'rails')} style={styles.checkBox} underlayColor={'rgba(200,200,200,0.05)'}  >
               <View style={styles.checkBoxWrapper}>
-                {this.state.filter.rails ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage} /> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage} />}
+                {this.props.filter.rails ? <Image source={require('../Assets/Images/selected.png')} style={styles.selectableFilterImage} /> : <Image source={require('../Assets/Images/square.png')} style={styles.selectableFilterImage} />}
                 <Text style={styles.checkBoxText}> Rails </Text>
               </View>
 
@@ -139,14 +169,29 @@ class List extends Component {
           </View>
         </View>
         <View style={styles.ListWrapper}>
-          <FlatList
+         {/*************************************************flatlist  for use state filters ************************************************* */}
+          {/* <FlatList
             data={ListData}
             extraData={this.state.filter}
             showsVerticalScrollIndicator={false}
             ListHeaderComponent={this.listHeaderGenerator}
             renderItem={({ item, index }) => <View>{this.state.filter[item.tag] && <ListItem bookingData={item} selected={this.state.filter} />}</View>
             } 
+            /> */}
+
+            {/* ***************************************************flatlist for use Redux filters ******************************************************* */}
+
+            <FlatList 
+            data={ListData}
+            extraData={this.props}
+            ListHeaderComponent={this.listHeaderGenerator}
+            renderItem={({item,index})=>{return(<View >{this.props.filter[item.tag] ? <ListItem  indexer={index} fadeStyle={this.state.fader} bookingData={item} selected={this.props.filter} /> : null }</View>)}}
+            
             />
+
+
+
+
         </View>
 
 
@@ -239,7 +284,7 @@ const styles = StyleSheet.create({
   },
   selectableFilterImage: {
     width: 20,
-    heigth: 20,
+    height: 20,
     borderRadius: 3,
     marginRight: 12
   },
@@ -346,5 +391,12 @@ const styles = StyleSheet.create({
   }
 });
 
+
+const mapStateToProps=state=>{
+return{
+  filter:state.filter
+}
+}
+
 //make this component available to the app
-export default List;
+export default connect(mapStateToProps,{filterCreator})(List);

@@ -38,6 +38,7 @@ const styles = StyleSheet.create({
     container: {
         flex: 2,
         backgroundColor: 'transparent',
+        // backgroundColor:'red'
     },
     profileTouchableWrapper: {
         flex: 1,
@@ -45,7 +46,7 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255,255,255,0.25)',
         // justifyContent: 'center',
         alignItems: 'center',
-        margin: 25,
+        margin: 18,
         padding: 12,
         borderRadius: 15,
         // borderWidth: 2,
