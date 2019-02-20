@@ -10,7 +10,7 @@ class ListItem extends Component {
             isSelected: false,
             fader:new Animated.Value(0),
             tag:this.props.bookingData.tag,
-            transformer:new Animated.Value(-50),
+            transformer:new Animated.Value(-100),
             
         }
     }
@@ -21,16 +21,16 @@ class ListItem extends Component {
     componentDidMount(){
         console.log(this.props.indexer)
         Animated.parallel([
-            Animated.timing((this.state.fader),{toValue:1,duration:600,delay:(this.props.indexer+1)*350}),
-            Animated.timing((this.state.transformer),{toValue:25,duration:600,delay:(this.props.indexer+1)*350})
+            Animated.timing((this.state.fader),{toValue:1,duration:400,delay:(this.props.indexer+1)*350}),
+            Animated.timing((this.state.transformer),{toValue:10,duration:750,delay:(this.props.indexer+1)*350})
         ],{useNativeDriver:true}).start()
         
     }
     componentDidUpdate(){
         console.log(this.props.indexer)
         Animated.parallel([
-            Animated.timing((this.state.fader),{toValue:1,duration:600,delay:(this.props.indexer+1)*350}),
-            Animated.timing((this.state.transformer),{toValue:25,duration:600,delay:(this.props.indexer+1)*350}),
+            Animated.timing((this.state.fader),{toValue:1,duration:400,delay:(this.props.indexer+1)*350}),
+            Animated.timing((this.state.transformer),{toValue:10,duration:750,delay:(this.props.indexer+1)*350}),
           
         ],{useNativeDriver:true}).start()
        

@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     profileImageNameWrapper:{
         // backgroundColor:'green',
         flexDirection: 'row',
+        marginLeft:-12
     },
     profileDropDown:{
         // flex:1,

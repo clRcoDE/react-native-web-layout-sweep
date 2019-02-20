@@ -200,14 +200,15 @@ class List extends Component {
                     {/* ***************************************************flatlist for use Redux filters ******************************************************* */}
 
 
-                   { this.state.loading ? <ActivityIndicator size={'large'} animating={true} /> : <FlatList
+                    <FlatList
                         data={this.props.filteredData}
+                        // style={{borderWidth:1}}
                         extraData={this.props.filteredData}
                         ListHeaderComponent={this.listHeaderGenerator}
                         ListEmptyComponent={() => <View style={styles.emptyWrapper}><Text style={styles.emptyListText}>NO TRIP TYPE SELECTED</Text></View>}
-                        renderItem={({ item, index }) => { return (<View ><ListItem indexer={index} fadeStyle={this.state.fader} bookingData={item} selected={this.props.filter} />{console.log(this.props.filteredData)}</View>) }}
+        renderItem={({ item, index }) => { return (<View >{ this.state.loading ? <ActivityIndicator size={'large'} animating={true} /> :<ListItem indexer={index} fadeStyle={this.state.fader} bookingData={item} selected={this.props.filter} />}</View>) }}
 
-                    />}
+                    />
 
 
 
