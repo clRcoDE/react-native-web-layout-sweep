@@ -6,9 +6,9 @@ return filterSubmitter(filterType)
 }
 
 
-const filterSubmitter=filterType=>{
+const filterSubmitter=ID=>{
     return{
         type:FILTER_ITEMS,
-        payload:filterType
+        ID
     }
 }
