@@ -57,8 +57,8 @@ class ListItem extends Component {
                                 <Text style={styles.timeSpanText} >{this.props.bookingData.endTime}</Text>
                             </View>
                             <View style={styles.itemFromToWrapper}>
-                                <Text style={[styles.semiText,styles.itemFromToStyles]} >{this.props.bookingData.fromCity},{this.props.bookingData.fromCountry}</Text>
-                                <Text style={[styles.semiText,styles.itemFromToStyles]} >{this.props.bookingData.toCity},{this.props.bookingData.toCountry}</Text>
+                                <Text style={[styles.semiText,styles.itemFromToStyles]} numberOfLines={1} >{this.props.bookingData.fromCity},{this.props.bookingData.fromCountry}</Text>
+                                <Text style={[styles.semiText,styles.itemFromToStyles]} numberOfLines={1}>{this.props.bookingData.toCity},{this.props.bookingData.toCountry}</Text>
                             </View>
                             <View style={styles.itemChangeBookingStatus}>
                                 <TouchableHighlight underlayColor='rgba(255, 255, 255,0.1)' onPress={() => { }} style={styles.changeStatusText} >

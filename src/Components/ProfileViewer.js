@@ -20,11 +20,11 @@ class ProfileViewer extends Component {
                                 style={styles.profilePhoto} />
                         </View>
                         <View style={styles.profileName}>
-                            <Text style={styles.profileNameText} >{this.props.user.username}</Text>
+                            <Text style={styles.profileNameText} numberOfLines={1} >{this.props.user.username}</Text>
                         </View>
                         </View>
                         <View style={styles.profileDropDown} >
-                            <Image source={require('../Assets/Images/uparrow.png')} style={{ width: 12, height: 12 }} />
+                            <Image source={require('../Assets/Images/uparrow.png')} style={{width: 12, height: 12 }} />
                         </View>
                     </View>
                 </TouchableHighlight>
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
     profileWrapper: {
         flex: 1,
         flexDirection: 'row',
-        justifyContent: 'space-between',
+        justifyContent: 'space-evenly',
         alignItems: 'center',
         // borderWidth: 2,
         // borderColor: 'blue',

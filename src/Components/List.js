@@ -113,13 +113,13 @@ class List extends Component {
                                 <TouchableHighlight underlayColor='rgba(0,0,0,0.25)' style={styles.recommendOsTouchable} onPress={() => { }}>
                                     <View style={styles.recommendOs} >
                                         <Image source={require('../Assets/Images/apple.png')} style={styles.iconStyle} />
-                                        <Text>for Iphone</Text>
+                                        <Text numberOfLines={1} >for Iphone</Text>
                                     </View>
                                 </TouchableHighlight>
                                 <TouchableHighlight underlayColor='rgba(0,0,0,0.25)' style={styles.recommendOsTouchable} onPress={() => { }}>
                                     <View style={styles.recommendOs} >
                                         <Image source={require('../Assets/Images/playstore.png')} style={styles.iconStyle} />
-                                        <Text>for Android</Text>
+                                        <Text numberOfLines={1}>for Android</Text>
                                     </View>
                                 </TouchableHighlight>
 
@@ -137,7 +137,7 @@ class List extends Component {
                         </View>
                         <View style={styles.learnMorePanelUpgrade}>
                             <View style={styles.getMoreOut}>
-                                <Text style={styles.getMoreOutText} >Get <b>more out</b></Text><Text style={styles.sweepText}>of Sweep</Text>
+                                <Text style={styles.getMoreOutText} numberOfLines={2} >Get <b>more out</b></Text><Text style={styles.sweepText}>of Sweep</Text>
                             </View>
                             <View style={styles.upgradeWrapper}>
                                 <TouchableHighlight onPress={() => { }} underlayColor='rgba(75, 85, 180,0.6)' style={styles.upgradeWrapperTouchable} >
