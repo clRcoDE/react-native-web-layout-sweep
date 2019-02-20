@@ -23,7 +23,7 @@ class List extends Component {
 
 
             // filteredData:ListData
-            filteredData: [],
+            // filteredData: [],
 
 
             buttons : [
@@ -37,7 +37,8 @@ class List extends Component {
                 {
                     id: 'rails',
                 }
-            ]
+            ],
+            loading:false
         }
 
 
@@ -69,8 +70,9 @@ class List extends Component {
 
         //**************************************  change filter with dispatching action - REDUX -  **************************************** */
         // this.setState(prev=>({filteredData:[]}))
+       await this.setState({loading:true})
        await this.props.filterCreator(ID)
-        this.setState({ filteredData: ListData.filter(item => this.props.selectedItems.findIndex(p => item.tag === p) >= 0) })
+        this.setState({loading:false})
         console.log(this.props)
         // this.setState(prev=>({flatlistToggler:false},()=>{setTimeout(()=>{this.setState({flatlistToggler:true})}, 1000 )}))
         // this.props.filter[item.tag] 
@@ -198,15 +200,14 @@ class List extends Component {
                     {/* ***************************************************flatlist for use Redux filters ******************************************************* */}
 
 
-
-                    <FlatList
-                        data={this.state.filteredData}
-                        extraData={this.state.filteredData}
+                   { this.state.loading ? <ActivityIndicator size={'large'} animating={true} /> : <FlatList
+                        data={this.props.filteredData}
+                        extraData={this.props.filteredData}
                         ListHeaderComponent={this.listHeaderGenerator}
                         ListEmptyComponent={() => <View style={styles.emptyWrapper}><Text style={styles.emptyListText}>NO TRIP TYPE SELECTED</Text></View>}
-                        renderItem={({ item, index }) => { return (<View >{this.state.filteredData.length > 0 ? <ListItem indexer={index} fadeStyle={this.state.fader} bookingData={item} selected={this.props.filter} /> : <ActivityIndicator size={"large"} animating={true} />}</View>) }}
+                        renderItem={({ item, index }) => { return (<View ><ListItem indexer={index} fadeStyle={this.state.fader} bookingData={item} selected={this.props.filter} />{console.log(this.props.filteredData)}</View>) }}
 
-                    />
+                    />}
 
 
 
@@ -452,7 +453,8 @@ borderColor:'red',
 
 const mapStateToProps = state => {
     return {
-        selectedItems: state.selectedItems
+        selectedItems: state.selectedItems,
+        filteredData: state.filteredData
     }
 }
 

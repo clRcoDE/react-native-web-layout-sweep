@@ -1,14 +1,14 @@
-import {FILTER_ITEMS} from '../types'
+import {SET_FILTER} from '../types'
 
 
-export const filterCreator=filterType=>{
-return filterSubmitter(filterType)
+export const filterCreator=ID=>{
+return filterSubmitter(ID)
 }
 
 
 const filterSubmitter=ID=>{
     return{
-        type:FILTER_ITEMS,
+        type:SET_FILTER,
         ID
     }
 }
