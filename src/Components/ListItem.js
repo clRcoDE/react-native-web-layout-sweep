@@ -1,6 +1,6 @@
 //import liraries
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, TouchableHighlight, Image , Animated} from 'react-native';
+import { View, Text, StyleSheet, TouchableHighlight, Image, Animated } from 'react-native';
 
 // create a component
 class ListItem extends Component {
@@ -8,140 +8,134 @@ class ListItem extends Component {
         super(props)
         this.state = {
             isSelected: false,
-            fader:new Animated.Value(0),
-            tag:this.props.bookingData.tag,
-            transformer:new Animated.Value(-100),
-            droper:new Animated.Value(-100),
-            fadier:new Animated.Value(0),
+            fader: new Animated.Value(0),
+            tag: this.props.bookingData.tag,
+            transformer: new Animated.Value(-100),
+            droper: new Animated.Value(-100),
+            fadier: new Animated.Value(0),
             mixHeight: new Animated.Value(0)
         }
     }
 
     collapseItem = i => {
-        if(this.state.droper._value === -100 ){
-            this.setState({isSelected:true},Animated.parallel([
+        if (this.state.droper._value === -100) {
+            this.setState({ isSelected: true }, Animated.parallel([
                 Animated.timing(this.state.droper,
-                {
-                    toValue:0,
-                    duration:1000,
-                    useNativeDriver:true
+                    {
+                        toValue: 0,
+                        duration: 1000
+                    }),
+                Animated.timing(this.state.fadier, {
+                    toValue: 1,
+                    duration: 1000
                 }),
-                Animated.timing(this.state.fadier,{
-                    toValue:1,
-                    duration:1000,
-                    useNativeDriver:true
-                }),
-                Animated.timing(this.state.mixHeight,{
-                    toValue:1,
-                    duration:1000,
-                    useNativeDriver:true
+                Animated.timing(this.state.mixHeight, {
+                    toValue: 1,
+                    duration: 1000
                 })
-                
-                ]).start())
-            
-                
-        }else if( this.state.droper._value === 0){
+
+            ]).start())
+
+
+        } else if (this.state.droper._value === 0) {
             Animated.parallel([
                 Animated.timing(this.state.droper,
-                {
-                    toValue:-100,
-                    duration:1000,
-                    useNativeDriver:true
-                }),
+                    {
+                        toValue: -100,
+                        duration: 1000
+                    }),
                 Animated.timing(
-                    this.state.fadier,{
-                        toValue:0,
-                        duration:1000,
-                        useNativeDriver:true
+                    this.state.fadier, {
+                        toValue: 0,
+                        duration: 1000
                     }
                 ),
-                
-                Animated.timing(this.state.mixHeight,{
-                    toValue:0,
-                    duration:1000,
-                    useNativeDriver:true
+
+                Animated.timing(this.state.mixHeight, {
+                    toValue: 0,
+                    duration: 1000
                 })
-                ]).start(()=>this.setState({isSelected:false}))
+            ]).start(() => this.setState({ isSelected: false }))
         }
     }
-    componentDidMount(){
+    componentDidMount() {
         console.log(this.props.indexer)
         Animated.parallel([
-            Animated.timing((this.state.fader),{toValue:1,duration:400,delay:(this.props.indexer+1)*350}),
-            Animated.timing((this.state.transformer),{toValue:10,duration:750,delay:(this.props.indexer+1)*350})
-        ],{useNativeDriver:true}).start()
-        
+            Animated.timing((this.state.fader), { toValue: 1, duration: 400, delay: (this.props.indexer + 1) * 350 }),
+            Animated.timing((this.state.transformer), { toValue: 10, duration: 750, delay: (this.props.indexer + 1) * 350 })
+        ], { useNativeDriver: true }).start()
+
     }
     // *****************************   componentDidUpdate removed  **************************//
 
 
 
     render() {
-        
-const mixHeight =  this.state.mixHeight.interpolate({
-    inputRange:[0,1],
-    outputRange:[0,200]
-})
+
+        const mixHeight = this.state.mixHeight.interpolate({
+            inputRange: [0, 1],
+            outputRange: [0, 200]
+        })
         // console.log(this.props.selected[this.props.bookingData.tag])
         return (
 
-            <Animated.View style={[styles.ListItemContainer,{opacity:this.state.fader,transform:([{translateX:this.state.transformer}])}]}>
-                 <Animated.View style={[styles.itemWrapper]}>
-                  <TouchableHighlight onPress={this.collapseItem.bind(this)} underlayColor='rgba(225, 225, 225,0.35)' style={styles.itemHeader}>
+            <Animated.View style={[styles.ListItemContainer, { opacity: this.state.fader, transform: ([{ translateX: this.state.transformer }]) }]}>
+                <Animated.View style={[styles.itemWrapper]}>
+                    <TouchableHighlight onPress={this.collapseItem.bind(this)} underlayColor='rgba(225, 225, 225,0.35)' style={styles.itemHeader}>
                         <View style={styles.itemHeaderWrapper} >
 
                             <View style={styles.itemDateWrapper}>
                                 <Text style={styles.timeSpanText} >{this.props.bookingData.startTime}</Text>
-                                {this.props.bookingData.endTime  && <Text style={styles.timeSpanText} >—</Text> }
+                                {this.props.bookingData.endTime && <Text style={styles.timeSpanText} >—</Text>}
                                 <Text style={styles.timeSpanText} >{this.props.bookingData.endTime}</Text>
                             </View>
                             <View style={styles.itemFromToWrapper}>
-                                <Text style={[styles.semiText,styles.itemFromToStyles]} numberOfLines={1} >{this.props.bookingData.fromCity},{this.props.bookingData.fromCountry}</Text>
-                                <Text style={[styles.semiText,styles.itemFromToStyles]} numberOfLines={1}>{this.props.bookingData.toCity},{this.props.bookingData.toCountry}</Text>
+                                <Text style={[styles.semiText, styles.itemFromToStyles]} numberOfLines={1} >{this.props.bookingData.fromCity},{this.props.bookingData.fromCountry}</Text>
+                                <Text style={[styles.semiText, styles.itemFromToStyles]} numberOfLines={1}>{this.props.bookingData.toCity},{this.props.bookingData.toCountry}</Text>
                             </View>
                             <View style={styles.itemChangeBookingStatus}>
                                 <TouchableHighlight underlayColor='rgba(255, 255, 255,0.1)' onPress={() => { }} style={styles.changeStatusText} >
                                     <Text style={[styles.lightText]} >cancel Booking</Text>
                                 </TouchableHighlight>
                                 <TouchableHighlight underlayColor='rgba(255, 255, 255,0.1)' onPress={() => { }} style={styles.changeStatusText} >
-                                    <Text style={[{color:'#0082FF'}]} >Change</Text>
+                                    <Text style={[{ color: '#0082FF' }]} >Change</Text>
                                 </TouchableHighlight>
                             </View>
                             <View style={styles.itemCollapsableImage}></View>
                         </View>
                     </TouchableHighlight>
-                    <Animated.View style={[styles.itemDesc,{transform:([{translateY:this.state.droper}]),opacity:this.state.fadier,height:mixHeight}]}>
+                    <Animated.View style={[styles.itemDesc, { transform: ([{ translateY: this.state.droper }]), opacity: this.state.fadier, height: mixHeight }]}>
                         <View style={styles.datesWrapper} >
-                        <Text style={styles.lightText} >{this.props.bookingData.startTime}</Text>
-                        
+                            <Text style={styles.lightText} >{this.props.bookingData.startTime}</Text>
+
                         </View>
                         <View style={styles.airplaneSeparator} >
-                        <Image source={require('../Assets/Images/plane.png') } style={styles.notifIcon}/>
-                        <Image source={require('../Assets/Images/dotted-line.png')} style={{height:125,width:2}}/>
-                        
+                            <Image source={require('../Assets/Images/plane.png')} style={styles.notifIcon} />
+                            <Image source={require('../Assets/Images/dotted-line.png')} style={{ height: 125, width: 2 }} />
+
                         </View>
                         <View style={styles.bookingDetails} >
                             <View style={styles.mainDetails}>
                                 <View style={styles.timeDetails}>
                                     <View style={styles.startEndTimeWrapper} >
                                         <View style={styles.startTime} >
-                                        <Text style={styles.hoursText}>{this.props.bookingData.TakeOff}</Text>
-                                        
+                                            <Text style={styles.hoursText}>{this.props.bookingData.TakeOff}</Text>
+
                                         </View>
                                         <View style={styles.midArrow} >
-                                        <Text style={styles.hoursText}>⟶</Text>
-                                        
+                                            <Text style={styles.hoursText}>⟶</Text>
+
                                         </View>
                                         <View style={styles.endTime} >
-                                        <Text style={styles.hoursText}>{this.props.bookingData.Landing}</Text></View>
+                                            <Text style={styles.hoursText}>{this.props.bookingData.Landing}</Text></View>
                                     </View>
                                     <View style={styles.startEndCity} >
                                         <View style={styles.startCity}>
-                                            <View style={[styles.startCityText]}><Text style={[styles.semiText,{ textTransform: 'uppercase'}]} >{this.props.bookingData.StartCityAbbreviation}</Text></View>
+                                            <View style={[styles.startCityText]}><Text style={[styles.semiText, { textTransform: 'uppercase' }]} >{this.props.bookingData.StartCityAbbreviation}</Text></View>
                                             <View style={styles.startCountryText}><Text style={styles.lightText}>{this.props.bookingData.fromCountry}</Text></View>
                                         </View>
                                         <View style={styles.endCity}>
-                                            <View style={[styles.endCityText]}><Text style={[styles.semiText,{ textTransform: 'uppercase'}]} >{this.props.bookingData.DestinationCityAbbreviation}</Text></View>
+                                            <View style={[styles.endCityText]}><Text style={[styles.semiText, { textTransform: 'uppercase' }]} >{this.props.bookingData.DestinationCityAbbreviation}</Text></View>
                                             <View style={styles.endCountryText}><Text style={styles.lightText}>{this.props.bookingData.toCountry}</Text></View>
                                         </View>
 
@@ -154,16 +148,16 @@ const mixHeight =  this.state.mixHeight.interpolate({
 
                             </View>
                             <View style={styles.sideDetails}>
-                            <View style={styles.subDetailsIcon} ><Image source={require('../Assets/Images/notif.png')} style={styles.notifIcon} /></View>
-                            <View style={[styles.subDetails,{paddingLeft:10}]} ><Text style={[styles.subDetailsText,styles.lightText]} >Seat :{this.props.bookingData.Seat}</Text></View>
-                            <View style={styles.subDetails} ><Text style={[styles.subDetailsText,styles.lightText]} >Class :{this.props.bookingData.class}</Text></View>
-                            <View style={[styles.subDetails,{flex:6}]} ><Text style={[styles.subDetailsText,styles.lightText]} >Meal plan :{this.props.bookingData.MealPlan}</Text></View>
-                            <View style={styles.subDetailsEmpty}></View>
-                            
+                                <View style={styles.subDetailsIcon} ><Image source={require('../Assets/Images/notif.png')} style={styles.notifIcon} /></View>
+                                <View style={[styles.subDetails, { paddingLeft: 10 }]} ><Text style={[styles.subDetailsText, styles.lightText]} >Seat :{this.props.bookingData.Seat}</Text></View>
+                                <View style={styles.subDetails} ><Text style={[styles.subDetailsText, styles.lightText]} >Class :{this.props.bookingData.class}</Text></View>
+                                <View style={[styles.subDetails, { flex: 6 }]} ><Text style={[styles.subDetailsText, styles.lightText]} >Meal plan :{this.props.bookingData.MealPlan}</Text></View>
+                                <View style={styles.subDetailsEmpty}></View>
+
                             </View>
                         </View>
 
-        </Animated.View>
+                    </Animated.View>
                 </Animated.View>
             </Animated.View>
         );
@@ -183,38 +177,38 @@ const styles = StyleSheet.create({
         // elevation: 5,
         // margin: 10,
         // borderRadius: 15,
-        
+
         // padding: 10,
         // backgroundColor:'#F5F5F5',
-        marginVertical:10,
-        borderTopLeftRadius:15,
-        borderTopRightRadius:15
+        marginVertical: 10,
+        borderTopLeftRadius: 15,
+        borderTopRightRadius: 15
     },
     itemWrapper: {
         flex: 1,
         // borderWidth: 3,
         // borderColor: 'purple',
         borderRadius: 15,
-    //    height:'50%',
+        //    height:'50%',
         // backgroundColor:'purple',
-position: 'relative',
+        position: 'relative',
 
     },
     itemHeader: {
         // flex: 1,
 
         height: 100,
-        elevation:10,
+        elevation: 10,
         shadowColor: 'rgba(0,0,0,1.0)',
-        shadowOffset:{width:0,height:6},
+        shadowOffset: { width: 0, height: 6 },
         shadowOpacity: 0.2,
         shadowRadius: 13,
-        borderTopLeftRadius:16,
-        borderTopRightRadius:16,
+        borderTopLeftRadius: 16,
+        borderTopRightRadius: 16,
 
         position: 'relative',
         zIndex: 1,
-        backgroundColor:'#F5F5F5',
+        backgroundColor: '#F5F5F5',
         // backgroundColor: 'lime'
         // borderWidth:2
     },
@@ -224,7 +218,7 @@ position: 'relative',
         // height: 175,
         // backgroundColor: 'royalblue',
         flexDirection: 'row',
-        backgroundColor:'#F5F5F5',
+        backgroundColor: '#F5F5F5',
     },
     itemHeaderWrapper: {
         flexDirection: 'row',
@@ -239,12 +233,12 @@ position: 'relative',
         // borderWidth: 1,
         // justifyContent: 'center',
         alignItems: 'center',
-        paddingLeft: 12
+        paddingLeft: 28
 
     },
-    timeSpanText:{
-        fontWeight:'600',
-        marginRight:5
+    timeSpanText: {
+        fontWeight: '600',
+        marginRight: 5
     },
     itemFromToWrapper: {
         flexDirection: 'row',
@@ -263,8 +257,8 @@ position: 'relative',
         alignItems: 'center',
 
     },
-    changeStatusText:{
-marginRight:25
+    changeStatusText: {
+        marginRight: 25
 
     },
     itemCollapsableImage: {
@@ -278,8 +272,8 @@ marginRight:25
     datesWrapper: {
         flex: 13,
         // borderWidth: 1
-        alignItems:'center',
-        paddingTop:35
+        alignItems: 'center',
+        paddingTop: 35
     },
     airplaneSeparator: {
         // borderWidth: 1,
@@ -288,16 +282,16 @@ marginRight:25
         // paddingTop:35,
         // borderStyle:'dashed'
         justifyContent: 'space-evenly',
-            alignItems: 'center',
-            // backgroundColor:'#F5F5F5'
+        alignItems: 'center',
+        // backgroundColor:'#F5F5F5'
 
-},
+    },
     bookingDetails: {
         flex: 48,
         // borderWidth: 1,
-        margin:15,
-        borderRadius:15,
-        paddingLeft:14
+        margin: 15,
+        borderRadius: 15,
+        paddingLeft: 14
     },
     mainDetails: {
         flex: 24,
@@ -322,8 +316,8 @@ marginRight:25
     sideDetails: {
         flex: 9,
         // backgroundColor: 'lightgreen',
-        flexDirection:'row',
-        
+        flexDirection: 'row',
+
         // borderBottomLeftRadius:15,
         // borderBottomRightRadius:15
     },
@@ -336,60 +330,60 @@ marginRight:25
     startEndCity: {
         flexDirection: 'row',
         // backgroundColor:'red',
-        flex:1
+        flex: 1
     },
-    startCity:{
+    startCity: {
         // borderWidth:1,
-        marginRight:75,
-        marginLeft:8
+        marginRight: 75,
+        marginLeft: 8
     },
-    endCity:{
+    endCity: {
         // borderWidth:1,
-        marginRight:75,
-        marginLeft:8
+        marginRight: 75,
+        marginLeft: 8
     },
-    semiText:{
-        fontWeight:'600',
+    semiText: {
+        fontWeight: '600',
         //  textTransform: 'uppercase'
-        color:'rgba(0,0,0,0.75)'
-    
+        color: 'rgba(0,0,0,0.75)'
+
     },
-    itemFromToStyles:{
-        marginRight:20
+    itemFromToStyles: {
+        marginRight: 20
     },
-    startEndTimeWrapper:{
+    startEndTimeWrapper: {
         flexDirection: 'row',
         // backgroundColor:'yellow',
-        flex:1,
+        flex: 1,
         alignItems: 'center',
     },
-     midArrow:{
+    midArrow: {
 
         // backgroundColor:'red',
-        marginRight:25
+        marginRight: 25
     },
-     endTime:{
+    endTime: {
 
         // backgroundColor:'red',
-        marginRight:25
+        marginRight: 25
     },
-    startTime:{
+    startTime: {
 
         // backgroundColor:'red',
-        marginRight:25
+        marginRight: 25
     },
-    notifIcon:{
-        width:14,
-        height:14
+    notifIcon: {
+        width: 14,
+        height: 14
     },
-    subDetailsIcon:{
-        flex:1,
+    subDetailsIcon: {
+        flex: 1,
         // backgroundColor:'red',
         justifyContent: 'center',
         alignItems: 'center',
     },
-    subDetails:{
-        flex:5,
+    subDetails: {
+        flex: 5,
         justifyContent: 'center',
         // paddingLeft:8,
         // alignItems: 'center',
@@ -397,18 +391,18 @@ marginRight:25
         // borderWidth:2,
 
     },
-    subDetailsEmpty:{
-        flex:4,
+    subDetailsEmpty: {
+        flex: 4,
         // backgroundColor:'red'
-    },    
-    hoursText:{
-        fontSize:18,
+    },
+    hoursText: {
+        fontSize: 18,
 
 
     },
-    lightText:{
-        fontSize:14,
-        color:'rgba(0,0,0,0.5)'
+    lightText: {
+        fontSize: 14,
+        color: 'rgba(0,0,0,0.5)'
     },
 });
 

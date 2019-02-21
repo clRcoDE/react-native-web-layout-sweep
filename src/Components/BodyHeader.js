@@ -27,9 +27,10 @@ class Header extends Component {
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        flex: 4,
+        flex: 6,
         backgroundColor: 'transparent',
         justifyContent: 'center',
+        marginTop: 20,
     },
     wrapper: {
         flexDirection: 'row',
@@ -41,11 +42,12 @@ const styles = StyleSheet.create({
         borderRadius:50
     },
     headerText: {
-        fontSize: 30,
+        fontSize: 25,
         fontFamily: 'sans-serif',
+        fontWeight: '500',
     },
     tapMoreImageWrapper: {
-        padding: 14,
+        padding: 16,
         borderRadius: 50,
         // borderWidth:2
         backgroundColor: 'rgba(255,255,255,0.3)'
@@ -61,9 +63,10 @@ const styles = StyleSheet.create({
         backgroundColor: '#0084FF',
         // paddingHorizontal:25,
         // paddingVertical: 4,
-        padding: 4,
-        borderRadius: 50,
-        elevation: 30,
+        // paddingVertical: 8,
+        padding:5,
+        borderRadius: 100,
+        // elevation: 30,
         // shadowOffset: 25,
     },
     tapMoreText: {

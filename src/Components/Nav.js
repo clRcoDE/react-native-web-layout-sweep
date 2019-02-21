@@ -29,12 +29,12 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
     },
     logoContainer:{
-        flex:2,
-        justifyContent: 'center',
+        flex:4,
+        // justifyContent: 'center',
         alignItems: 'center',
         flexDirection: 'row',
-        // backgroundColor:'red',
-        // marginLeft: 25,
+        // backgroundColor:'yellow',
+        marginLeft: 25,
     },
     logoText:{
         fontFamily: '"Comic Sans MS", cursive, sans-serif',

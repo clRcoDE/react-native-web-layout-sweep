@@ -34,13 +34,13 @@ export default class NavMenu extends Component {
 
                 Animated.parallel([
                     Animated.timing(this.state.selectedHeight, {
-                        toValue: 180,
+                        toValue: 195,
                         duration: 150
                     }),
-                    Animated.timing(this.state.selectedOpacity, {
-                        toValue: 1,
-                        duration: 300
-                    })
+                    // Animated.timing(this.state.selectedOpacity, {
+                    //     toValue: 1,
+                    //     duration: 300
+                    // })
                 ]).start()
                 this.setState({ selectedId: index, })
 
@@ -51,7 +51,7 @@ export default class NavMenu extends Component {
                 // this.setState({ selectedId: index, })
 
 
-            } else if (this.state.selectedHeight._value === 180) {
+            } else if (this.state.selectedHeight._value === 195) {
 
 
                 /*************************  if it was opened   ********************/
@@ -59,12 +59,12 @@ export default class NavMenu extends Component {
                 Animated.parallel([
                     Animated.timing(this.state.selectedHeight, {
                         toValue: 50,
-                        duration: 300
+                        duration: 200
                     }),
-                    Animated.timing(this.state.selectedOpacity, {
-                        toValue: 0,
-                        duration: 150
-                    }),
+                    // Animated.timing(this.state.selectedOpacity, {
+                    //     toValue: 0,
+                    //     duration: 150
+                    // }),
 
                 ]).start(() => { this.setState({ selectedId: -1, }) })
 
@@ -85,13 +85,22 @@ export default class NavMenu extends Component {
                 Animated.timing(this.state.selectedHeight, {
                     toValue: 50,
                     duration: 100
-                })
+                }),
+                // Animated.timing(this.state.selectedOpacity, {
+                //     toValue: 1,
+                //     duration: 150
+                // }),
             ]).start(() => {
                 this.setState({ selectedId: index }, () => Animated.parallel([
                     Animated.timing(this.state.selectedHeight, {
-                        toValue: 180,
+                        toValue: 195,
                         duration: 150
-                    })
+                    }),
+                    // Animated.timing(this.state.selectedOpacity, {
+                    //     toValue: 1,
+                    //     duration: 300
+                    // })
+
                 ]).start())
             })
 
@@ -143,7 +152,7 @@ export default class NavMenu extends Component {
                                         <View>
 
                                         </View>
-                                        {this.state.selectedId === index && <View style={styles.elementChildsWrapper}>
+                                        {this.state.selectedId === index && <View style={[styles.elementChildsWrapper]}>
                                             {item.childs.map((item, indx) =>
                                                 <TouchableHighlight onPress={() => { }} underlayColor='rgba(0, 100, 190,0.5)' style={styles.childElement}>
                                                     <View style={styles.childElementWrapper} >
@@ -171,9 +180,9 @@ export default class NavMenu extends Component {
 const styles = StyleSheet.create({
 
     container: {
-        flex: 9,
-        // backgroundColor: 'red',
-        marginLeft: 14,
+        flex: 19,
+        // backgroundColor: 'green',
+        marginLeft: 18,
         justifyContent: 'center',
     },
     expandedStyle: {
@@ -201,7 +210,13 @@ const styles = StyleSheet.create({
         // marginLeft:2
     },
 
-    touchableStyles: { flex: 1, borderTopLeftRadius: 50, borderBottomLeftRadius: 50, paddingTop: 20, paddingLeft: 20, },
+    touchableStyles: {
+         flex: 1,
+          borderTopLeftRadius: 50,
+           borderBottomLeftRadius: 50,
+            paddingTop: 20, 
+            paddingLeft: 20, 
+        },
     elementParent: {
         // flexDirection: 'row',
         // justifyContent: 'center',
@@ -209,7 +224,7 @@ const styles = StyleSheet.create({
         // borderWidth: 3,
     },
     elementsTitleText: {
-        color: 'rgba(255,255,255,0.75)',
+        color: 'rgba(255,255,255,1.0)',
         fontWeight: '400',
         marginLeft: 20,
         fontSize: 13
@@ -228,12 +243,14 @@ const styles = StyleSheet.create({
         marginVertical: 16
     },
     childElement: {
-        height: 40,
+        height: 45,
         alignItems: 'center',
         flexDirection: 'row',
         // backgroundColor:'blue',
         borderTopLeftRadius: 50,
-        borderBottomLeftRadius: 50
+        borderBottomLeftRadius: 50,
+        marginLeft:-14,
+        paddingLeft:14
 
     },
     iconStyles: {
@@ -245,7 +262,7 @@ const styles = StyleSheet.create({
         // paddingLeft:15
     },
     childElementText: {
-        color: '#fff',
+        color: 'rgba(255,255,255,0.7)',
         fontSize: 12,
         marginLeft: 12
     }

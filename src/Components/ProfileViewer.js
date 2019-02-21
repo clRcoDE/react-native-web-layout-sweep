@@ -24,7 +24,7 @@ class ProfileViewer extends Component {
                         </View>
                         </View>
                         <View style={styles.profileDropDown} >
-                            <Image source={require('../Assets/Images/uparrow.png')} style={{width: 12, height: 12 }} />
+                            <Image source={require('../Assets/Images/uparrow.png')} style={{width: 14, height: 14 }} />
                         </View>
                     </View>
                 </TouchableHighlight>
@@ -36,7 +36,7 @@ class ProfileViewer extends Component {
 // define your styles
 const styles = StyleSheet.create({
     container: {
-        flex: 2,
+        flex: 4,
         backgroundColor: 'transparent',
         // backgroundColor:'red'
     },
@@ -45,9 +45,10 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         backgroundColor: 'rgba(255,255,255,0.25)',
         // justifyContent: 'center',
-        alignItems: 'center',
-        margin: 18,
-        padding: 12,
+        // alignItems: 'center',
+        marginHorizontal: 15,
+        marginVertical:18,
+        // padding: 12,
         borderRadius: 15,
         // borderWidth: 2,
 
@@ -59,11 +60,12 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         // borderWidth: 2,
         // borderColor: 'blue',
-        padding:10
+        // padding:10
+
     },
     profilePhoto: {
-        width: 40,
-        height: 40,
+        width: 50,
+        height: 50,
         borderRadius: 50
     },
     profileName: {

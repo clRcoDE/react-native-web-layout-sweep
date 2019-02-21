@@ -157,24 +157,24 @@ class List extends Component {
                     <View style={styles.filterCheckBoxesWrapper}>
 
 
-                        <Text style={styles.showableText}>Show : </Text>
+                        <Text style={styles.lightText}>Show : </Text>
 
 
 
                         {this.state.buttons.map((item, index) => this.props.selectedItems.findIndex(p => p === item.id) >=0 
-                            ? <TouchableHighlight key={index} onPress={this.changeFilter.bind(this, item.id)} style={styles.checkBox}>
+                            ? <TouchableHighlight underlayColor={'transparent'} key={index} onPress={this.changeFilter.bind(this, item.id)} style={styles.checkBox}>
                             <View style={styles.checkBoxWrapper} >
                                 <View style={styles.emptyBox} >
-                                    <Image source={require('../Assets/Images/checked.png')} style={{ height: 16, width: 16 }} />
+                                    <Image source={require('../Assets/Images/checked.png')} style={{ height: 10, width: 10 }} />
                                 </View>
-                                <Text>{item.id}</Text>
+                                <Text style={styles.filtersText} >{item.id}</Text>
                             </View>
                         </TouchableHighlight>
-                           : <TouchableHighlight key={index} onPress={this.changeFilter.bind(this, item.id)} style={styles.checkBox} >
+                           : <TouchableHighlight underlayColor={'transparent'}  key={index} onPress={this.changeFilter.bind(this, item.id)} style={styles.checkBox} >
                             <View style={styles.checkBoxWrapper} >
                                 <View style={styles.emptyBox} >
                                 </View>
-                                <Text>{item.id}</Text>
+                                <Text style={styles.filtersText} >{item.id}</Text>
                             </View>
                         </TouchableHighlight>
                         )}
@@ -227,7 +227,7 @@ class List extends Component {
 const styles = StyleSheet.create({
 
     container: {
-        flex: 18,
+        flex: 36,
         backgroundColor: 'transparent'
     },
     filterBoxContainer: {
@@ -260,14 +260,26 @@ const styles = StyleSheet.create({
     filterCheckBoxesWrapper: {
         flexDirection: 'row',
         // borderWidth: 3,
+        alignItems: 'center',
+        paddingLeft:10
     },
-
+    lightText:{
+        fontWeight:'600',
+        color:'#aaa'
+    },
     emptyBox: {
         width: 26,
         height: 26,
-        backgroundColor: '#a0a0a3',
+        backgroundColor: '#f4f4f4',
         justifyContent: 'center',
         alignItems: 'center',
+        borderRadius:4
+    },
+    filtersText:{
+fontWeight:'600',
+// fontFamily: 'Roboto,sans-serif',
+color:'#222',
+fontSize:13
     },
     checkBox: {
         flexDirection: 'row',
@@ -276,7 +288,7 @@ const styles = StyleSheet.create({
         // justifyContent: 'center',
         alignItems: 'center',
         width:100,
-        marginHorizontal:25
+        marginHorizontal:20
         // borderWidth:2,
         // borderColor:'red'
 
@@ -327,6 +339,8 @@ borderColor:'red',
         // backgroundColor:'green',
         marginRight: 12,
         flex: 1,
+        backgroundColor:'#fff',
+        padding:3
         // backgroundColor:'red'
 
 
