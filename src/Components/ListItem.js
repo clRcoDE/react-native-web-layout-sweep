@@ -62,7 +62,7 @@ class ListItem extends Component {
         console.log(this.props.indexer)
         Animated.parallel([
             Animated.timing((this.state.fader), { toValue: 1, duration: 400, delay: (this.props.indexer + 1) * 350 }),
-            Animated.timing((this.state.transformer), { toValue: 10, duration: 750, delay: (this.props.indexer + 1) * 350 })
+            Animated.timing((this.state.transformer), { toValue: 1, duration: 750, delay: (this.props.indexer + 1) * 350 })
         ], { useNativeDriver: true }).start()
 
     }

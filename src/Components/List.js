@@ -150,6 +150,10 @@ class List extends Component {
             </View>
         )
     }
+
+    listFooterGenerator=()=>(
+        <View style={styles.listFooter} ><TouchableHighlight underlayColor={'transparent'} onPress={()=>{}}  ><Text style={styles.footerText} >All Trips gathered by SWEEP.IO from different resources</Text></TouchableHighlight></View>
+    )
     render() {
         return (
             <View style={styles.container}>
@@ -205,6 +209,7 @@ class List extends Component {
                         // style={{borderWidth:1}}
                         extraData={this.props.filteredData}
                         ListHeaderComponent={this.listHeaderGenerator}
+                        ListFooterComponent={this.listFooterGenerator}
                         ListEmptyComponent={() => <View style={styles.emptyWrapper}><Text style={styles.emptyListText}>NO TRIP TYPE SELECTED</Text></View>}
         renderItem={({ item, index }) => { return (<View >{ this.state.loading ? <ActivityIndicator size={'large'} animating={true} /> :<ListItem indexer={index} fadeStyle={this.state.fader} bookingData={item} selected={this.props.filter} />}</View>) }}
 
@@ -236,6 +241,18 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         // borderWidth:3,
         // borderColor:'orange'
+    },
+    listFooter:{
+height:200,
+        backgroundColor:'#f5f5f5',
+        justifyContent: 'center',
+        alignItems: 'center',
+        // marginHorizontal: 2,
+    },
+    footerText:{
+        color:'#ccc',
+        fontStyle: 'italic',
+        fontWeight:'600'
     },
     checkBox: {
         flexDirection: 'row',
@@ -377,7 +394,8 @@ borderColor:'red',
         minHeight: 225,
         elevation: 5,
 
-        margin: 10,
+        // margin: 10,
+        marginVertical:36,
         borderRadius: 15,
         // borderWidth:3,
         borderColor: 'red'
