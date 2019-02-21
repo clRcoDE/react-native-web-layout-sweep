@@ -11,12 +11,58 @@ class ListItem extends Component {
             fader:new Animated.Value(0),
             tag:this.props.bookingData.tag,
             transformer:new Animated.Value(-100),
-            
+            droper:new Animated.Value(-100),
+            fadier:new Animated.Value(0),
+            mixHeight: new Animated.Value(0)
         }
     }
 
     collapseItem = i => {
-        this.setState(prev => ({ isSelected: !prev.isSelected } ))
+        if(this.state.droper._value === -100 ){
+            this.setState({isSelected:true},Animated.parallel([
+                Animated.timing(this.state.droper,
+                {
+                    toValue:0,
+                    duration:1000,
+                    useNativeDriver:true
+                }),
+                Animated.timing(this.state.fadier,{
+                    toValue:1,
+                    duration:1000,
+                    useNativeDriver:true
+                }),
+                Animated.timing(this.state.mixHeight,{
+                    toValue:1,
+                    duration:1000,
+                    useNativeDriver:true
+                })
+                
+                ]).start())
+            
+                
+        }else if( this.state.droper._value === 0){
+            Animated.parallel([
+                Animated.timing(this.state.droper,
+                {
+                    toValue:-100,
+                    duration:1000,
+                    useNativeDriver:true
+                }),
+                Animated.timing(
+                    this.state.fadier,{
+                        toValue:0,
+                        duration:1000,
+                        useNativeDriver:true
+                    }
+                ),
+                
+                Animated.timing(this.state.mixHeight,{
+                    toValue:0,
+                    duration:1000,
+                    useNativeDriver:true
+                })
+                ]).start(()=>this.setState({isSelected:false}))
+        }
     }
     componentDidMount(){
         console.log(this.props.indexer)
@@ -26,28 +72,21 @@ class ListItem extends Component {
         ],{useNativeDriver:true}).start()
         
     }
-    componentDidUpdate(){
-        console.log(this.props.indexer)
-        Animated.parallel([
-            Animated.timing((this.state.fader),{toValue:1,duration:400,delay:(this.props.indexer+1)*350}),
-            Animated.timing((this.state.transformer),{toValue:10,duration:750,delay:(this.props.indexer+1)*350}),
-          
-        ],{useNativeDriver:true}).start()
-       
-
-    }
+    // *****************************   componentDidUpdate removed  **************************//
 
 
 
     render() {
         
-
-    
+const mixHeight =  this.state.mixHeight.interpolate({
+    inputRange:[0,1],
+    outputRange:[0,200]
+})
         // console.log(this.props.selected[this.props.bookingData.tag])
         return (
 
             <Animated.View style={[styles.ListItemContainer,{opacity:this.state.fader,transform:([{translateX:this.state.transformer}])}]}>
-                 <View style={styles.itemWrapper}>
+                 <Animated.View style={[styles.itemWrapper]}>
                   <TouchableHighlight onPress={this.collapseItem.bind(this)} underlayColor='rgba(225, 225, 225,0.35)' style={styles.itemHeader}>
                         <View style={styles.itemHeaderWrapper} >
 
@@ -71,7 +110,7 @@ class ListItem extends Component {
                             <View style={styles.itemCollapsableImage}></View>
                         </View>
                     </TouchableHighlight>
-                    {  this.state.isSelected &&  <View style={[styles.itemDesc]}>
+                    <Animated.View style={[styles.itemDesc,{transform:([{translateY:this.state.droper}]),opacity:this.state.fadier,height:mixHeight}]}>
                         <View style={styles.datesWrapper} >
                         <Text style={styles.lightText} >{this.props.bookingData.startTime}</Text>
                         
@@ -124,8 +163,8 @@ class ListItem extends Component {
                             </View>
                         </View>
 
-                    </View>}
-                </View>
+        </Animated.View>
+                </Animated.View>
             </Animated.View>
         );
     }
@@ -146,17 +185,19 @@ const styles = StyleSheet.create({
         // borderRadius: 15,
         
         // padding: 10,
-        backgroundColor:'#F5F5F5',
-        marginVertical:14,
+        // backgroundColor:'#F5F5F5',
+        marginVertical:10,
         borderTopLeftRadius:15,
         borderTopRightRadius:15
     },
     itemWrapper: {
         flex: 1,
         // borderWidth: 3,
-        borderColor: 'purple',
+        // borderColor: 'purple',
         borderRadius: 15,
+    //    height:'50%',
         // backgroundColor:'purple',
+position: 'relative',
 
     },
     itemHeader: {
@@ -170,15 +211,20 @@ const styles = StyleSheet.create({
         shadowRadius: 13,
         borderTopLeftRadius:16,
         borderTopRightRadius:16,
+
+        position: 'relative',
+        zIndex: 1,
+        backgroundColor:'#F5F5F5',
         // backgroundColor: 'lime'
         // borderWidth:2
     },
     itemDesc: {
         // flex: 1,
 
-        height: 200,
+        // height: 175,
         // backgroundColor: 'royalblue',
         flexDirection: 'row',
+        backgroundColor:'#F5F5F5',
     },
     itemHeaderWrapper: {
         flexDirection: 'row',

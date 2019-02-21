@@ -8,7 +8,7 @@ export default class NavMenu extends Component {
             selectedId: null,
             selectedHeight: new Animated.Value(50),
             normalHight: new Animated.Value(50),
-
+            selectedOpacity: new Animated.Value(0)
         }
 
 
@@ -16,25 +16,98 @@ export default class NavMenu extends Component {
 
 
     collapseItem = index => {
+
+
+
         if (this.state.selectedId === index) {
+
+
+
+            // if user clicks on same button // 
+
 
             if (this.state.selectedHeight._value === 50) {
 
-                Animated.timing(this.state.selectedHeight, { toValue: 180, duration: 100 }).start()
+                /*************************  if it was closed   ******************* */
+
+
+
+                Animated.parallel([
+                    Animated.timing(this.state.selectedHeight, {
+                        toValue: 180,
+                        duration: 150
+                    }),
+                    Animated.timing(this.state.selectedOpacity, {
+                        toValue: 1,
+                        duration: 300
+                    })
+                ]).start()
                 this.setState({ selectedId: index, })
+
+                // Animated.timing(this.state.selectedHeight, { 
+                //     toValue: 180,
+                //      duration: 1500 
+                //     }).start()
+                // this.setState({ selectedId: index, })
+
 
             } else if (this.state.selectedHeight._value === 180) {
 
-                Animated.timing(this.state.selectedHeight, { toValue: 50, duration: 100 }).start(() => {
-                    this.setState({ selectedId: -1, })
-                })
 
+                /*************************  if it was opened   ********************/
+
+                Animated.parallel([
+                    Animated.timing(this.state.selectedHeight, {
+                        toValue: 50,
+                        duration: 300
+                    }),
+                    Animated.timing(this.state.selectedOpacity, {
+                        toValue: 0,
+                        duration: 150
+                    }),
+
+                ]).start(() => { this.setState({ selectedId: -1, }) })
+
+
+                // Animated.timing(this.state.selectedHeight, { 
+                //     toValue: 50,
+                //      duration: 300 
+                //     }).start(() => {this.setState({ selectedId: -1, })  })
 
             }
+
         } else if (this.state.selectedId !== index) {
 
+            /*************************  if user click on new Button  ********************/
 
-            Animated.timing(this.state.selectedHeight, { toValue: 50, duration: 100 }).start(() => { this.setState({ selectedId: index }, () => Animated.timing(this.state.selectedHeight, { toValue: 180, duration: 150 }).start()); })
+
+            Animated.parallel([
+                Animated.timing(this.state.selectedHeight, {
+                    toValue: 50,
+                    duration: 100
+                })
+            ]).start(() => {
+                this.setState({ selectedId: index }, () => Animated.parallel([
+                    Animated.timing(this.state.selectedHeight, {
+                        toValue: 180,
+                        duration: 150
+                    })
+                ]).start())
+            })
+
+
+
+
+
+            // Animated.timing(this.state.selectedHeight, {
+            //     toValue: 50,
+            //     duration: 100
+            // }).start(() => {
+            //     this.setState({ selectedId: index }, () => Animated.timing(this.state.selectedHeight, {
+            //         toValue: 180,
+            //         duration: 150
+            //     }).start());
+            // })
 
 
 
@@ -68,11 +141,11 @@ export default class NavMenu extends Component {
                                             <Text style={styles.elementsTitleText}>{item.title}</Text>
                                         </View>
                                         <View>
-                                            
+
                                         </View>
                                         {this.state.selectedId === index && <View style={styles.elementChildsWrapper}>
                                             {item.childs.map((item, indx) =>
-                                                <TouchableHighlight onPress={() => { }} underlayColor='rgba(0, 100, 190,0.5)'  style={styles.childElement}>
+                                                <TouchableHighlight onPress={() => { }} underlayColor='rgba(0, 100, 190,0.5)' style={styles.childElement}>
                                                     <View style={styles.childElementWrapper} >
                                                         <Image source={item.icon} style={styles.iconStyles} />
                                                         <Text style={styles.childElementText}>{item.text}</Text>
@@ -128,7 +201,7 @@ const styles = StyleSheet.create({
         // marginLeft:2
     },
 
-    touchableStyles: { flex: 1, borderTopLeftRadius: 50, borderBottomLeftRadius: 50, paddingTop:20, paddingLeft: 20, },
+    touchableStyles: { flex: 1, borderTopLeftRadius: 50, borderBottomLeftRadius: 50, paddingTop: 20, paddingLeft: 20, },
     elementParent: {
         // flexDirection: 'row',
         // justifyContent: 'center',
